@@ -1,0 +1,152 @@
+---
+import Container from "../components/Container.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Studio Profil | studio-os.de">
+    <main class="pt-32 pb-24 min-h-screen">
+        <Container>
+            <div class="relative reveal">
+                <!-- Header Section -->
+                <div class="flex flex-col md:flex-row items-center gap-16 mb-32">
+                    <div class="w-full md:w-2/5 lg:w-1/3">
+                        <div class="relative group">
+                            <!-- Image (Smaller, No Box) -->
+                            <div class="relative z-10">
+                                <img src="/images/profile/PROFILE.webp" class="w-full h-auto rounded-[2.5rem] transition-transform duration-700 group-hover:scale-105" alt="Simeon Ostermann" />
+                            </div>
+                            <!-- Dark Mode Glow -->
+                            <div class="absolute inset-0 bg-matcha/30 blur-[80px] rounded-full scale-110 opacity-0 dark:opacity-100 -z-10 transition-opacity duration-700"></div>
+                            <!-- Decorative Bokeh (Always) -->
+                            <div class="absolute -bottom-12 -left-12 w-64 h-64 bg-almond/10 blur-[100px] rounded-full -z-10"></div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-3/5 lg:w-2/3">
+                        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white font-heading mb-6">
+                            Studio Profil
+                        </h1>
+                        <div class="h-1 w-20 bg-almond mb-8"></div>
+                        <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-200 font-heading italic leading-relaxed max-w-2xl">
+                            "Technologische Präzision trifft auf jahrelange Erfahrung am Bau – für Ergebnisse, die überzeugen."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <div class="space-y-12">
+                        <section>
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-4 flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-matcha/10 border border-matcha/20 flex items-center justify-center text-matcha">01</span>
+                                Gesammelte Erfahrung für Ihren Nutzen
+                            </h2>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                Mit über einem Jahrzehnt praktischer Erfahrung in der Bau- und Designbranche liegt mein Fokus auf der präzisen Planerstellung anspruchsvoller Bauvorhaben. Meine berufliche Laufbahn beinhaltete neben der klassischen Architektur und Bestandsaufnahme auch Innenarchitektur. Besonders vertraut bin ich mit der Herausforderung komplexer Altbauten. Die genaue Bestandsaufnahme selbst unter schwierigen geometrischen Bedingungen gehört zu meinen Kernkompetenzen.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-4 flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-matcha/10 border border-matcha/20 flex items-center justify-center text-matcha">02</span>
+                                Technologische Expertise als zentraler Vorteil
+                            </h2>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                Mein Arbeitsansatz ist tief in modernster Technologie verwurzelt und basiert auf tiefgreifenden Kenntnissen einer Vielzahl von CAD- und 3D-Software-Lösungen, ergänzt durch den strategischen Einsatz von Künstlicher Intelligenz (KI). Die effektive Nutzung dieser ist der Schlüssel zur Sicherstellung von Effizienz und Qualität der Planung. Während größere, traditionelle Büros mit Overhead-Kosten kämpfen, ermöglicht mir diese schlanke und technologisch fortschrittliche Arbeitsweise, meine Expertise besonders kosteneffizient anzubieten. Meine Kunden erhalten somit High-End-Planung auf dem neuesten Stand der Technik.
+                            </p>
+                        </section>
+                    </div>
+
+                    <div class="space-y-12">
+                        <section>
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-4 flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-lg bg-matcha/10 border border-matcha/20 flex items-center justify-center text-matcha">03</span>
+                                Mein Bekenntnis zu BIM-Qualität
+                            </h2>
+                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                Ich verfolge konsequent die Prinzipien des BIM (Building Information Modeling). Für mich ist dies mehr als nur ein Programm – es ist eine Garantie für Planungsqualität. Die korrekte Anwendung von BIM schafft konsistente, datenbankgestützte Planzeichnungen, die Klarheit und Kontrolle bieten. Dieses Vorgehen ermöglicht es, komplexe Designentscheidungen bereits im Vorfeld virtuell abzustimmen, potenzielle Kollisionen frühzeitig zu beheben und Kosten exakter zu prognostizieren.
+                            </p>
+                        </section>
+
+                        <section class="p-8 rounded-3xl border border-almond/20 bg-almond/5 backdrop-blur-sm relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-almond/10 blur-3xl rounded-full -translate-y-12 translate-x-12"></div>
+                            
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white font-heading mb-4">
+                                Lassen Sie uns Ihre Vision realisieren.
+                            </h2>
+                            <p class="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
+                                Jedes erfolgreiche Projekt beginnt mit einem Gespräch. Wenn Sie einen Planer suchen, der traditionelle Expertise mit den digitalen Möglichkeiten von morgen verbindet, freue ich mich darauf, Sie kennenzulernen.
+                            </p>
+
+                            <div class="w-full mt-auto">
+                                <!-- Signature Images (Full Width) -->
+                                <img src="/images/profile/UNTERSCHRIFT light.webp" class="w-full h-auto dark:hidden" alt="Unterschrift Simeon Ostermann" />
+                                <img src="/images/profile/UNTERSCHRIFT dark.webp" class="w-full h-auto hidden dark:block" alt="Unterschrift Simeon Ostermann" />
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="mt-24 text-center">
+                    <a href="/#kontakt" class="relative inline-flex h-12 items-center justify-center px-12 rounded-full bg-almond text-eclipse font-bold transition hover:scale-105 active:scale-95 shadow-lg shadow-almond/20">
+                        Kontakt aufnehmen
+                    </a>
+                </div>
+
+                <!-- Social Media Links (Prevalent) -->
+                <div class="mt-32 reveal flex flex-col items-center">
+                    <h3 class="text-lg font-heading font-bold text-gray-400 uppercase tracking-[0.3em] mb-10">Netzwerke</h3>
+                    <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+                        <a href="https://de.pinterest.com/outlinesshapes/" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
+                            <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-almond/50 shadow-xl overflow-hidden">
+                                <img src="/images/logos/pinterest light.svg" class="w-8 h-8 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
+                                <img src="/images/logos/pinterest dark.svg" class="w-8 h-8 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
+                            </div>
+                            <span class="text-xs font-heading font-bold text-gray-500 group-hover:text-white transition-colors">Pinterest</span>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
+                            <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-almond/50 shadow-xl overflow-hidden">
+                                <img src="/images/logos/instagram light.svg" class="w-8 h-8 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                                <img src="/images/logos/instagram dark.svg" class="w-8 h-8 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                            </div>
+                            <span class="text-xs font-heading font-bold text-gray-500 group-hover:text-white transition-colors">Instagram</span>
+                        </a>
+                        <a href="https://linkedin.com/in/simeon-ostermann-583964390" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
+                            <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-almond/50 shadow-xl overflow-hidden">
+                                <img src="/images/logos/linkedin light.svg" class="w-8 h-8 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                                <img src="/images/logos/linkedin dark.svg" class="w-8 h-8 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                            </div>
+                            <span class="text-xs font-heading font-bold text-gray-500 group-hover:text-white transition-colors">LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </Container>
+    </main>
+</Layout>
+
+<style>
+    .reveal {
+        opacity: 0;
+        transform: translateY(2rem);
+        transition: all 0.8s ease-out;
+    }
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+</script>

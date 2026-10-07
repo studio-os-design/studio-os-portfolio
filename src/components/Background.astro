@@ -1,0 +1,149 @@
+<div id="bg-container">
+  <div id="fluid-bg"></div>
+  <div id="grid-overlay"></div>
+  <canvas id="pointCloudCanvas"></canvas>
+</div>
+
+<style>
+  #bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+    background-color: var(--bg-color);
+  }
+
+  #fluid-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--fluid-gradient);
+    background-size: 400% 400%;
+    animation: fluidMove 35s infinite ease-in-out;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.1);
+    will-change: transform;
+  }
+
+  #grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 4.5rem 4.5rem;
+    -webkit-mask-image: radial-gradient(circle 450px at var(--mouse-x, 50%) var(--mouse-y, 50%), #000 15%, rgba(0,0,0,0.15) 100%);
+    mask-image: radial-gradient(circle 450px at var(--mouse-x, 50%) var(--mouse-y, 50%), #000 15%, rgba(0,0,0,0.15) 100%);
+  }
+
+  canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>
+  const gridOverlay = document.getElementById('grid-overlay');
+  const canvas = document.getElementById('pointCloudCanvas') as HTMLCanvasElement;
+  const ctx = canvas?.getContext('2d');
+
+  if (canvas && ctx) {
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    let points: Point[] = [];
+    let mouse = { x: width/2, y: height/2, targetX: width/2, targetY: height/2 };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+      
+      gridOverlay?.style.setProperty('--mouse-x', `${e.clientX}px`);
+      gridOverlay?.style.setProperty('--mouse-y', `${e.clientY}px`);
+    });
+
+    window.addEventListener('scroll', () => {
+      // Removed translateY parallax as it caused visible breaks on long pages
+    }, { passive: true });
+
+    class Point {
+      x: number;
+      y: number;
+      size: number;
+      phase: number;
+      flickerSpeed: number;
+
+      constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+        this.size = 1.1;
+        this.phase = Math.random() * Math.PI * 2;
+        this.flickerSpeed = 0.001 + Math.random() * 0.002;
+      }
+      
+      draw(time: number) {
+        if (!ctx) return;
+        
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        
+        let maxRange = Math.max(width, height) * 0.8;
+        let distanceOpacity = Math.pow(Math.max(0, 1 - (distance / maxRange)), 2); 
+        
+        let flicker = (Math.sin(time * this.flickerSpeed + this.phase) + 1) / 2;
+        let finalOpacity = distanceOpacity * flicker;
+        
+        if (finalOpacity < 0.005) return;
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        
+        const pointColor = getComputedStyle(document.documentElement).getPropertyValue('--point-color').trim() || 'rgba(61, 74, 65, 0.4)';
+        
+        ctx.globalAlpha = finalOpacity;
+        ctx.fillStyle = pointColor;
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+      }
+    }
+
+    function init() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      points = [];
+      
+      const gridStep = 36; 
+      
+      for (let x = 0; x <= width + gridStep; x += gridStep) {
+        for (let y = 0; y <= height + gridStep; y += gridStep) {
+          points.push(new Point(x, y));
+        }
+      }
+    }
+
+    function animate(time: number) {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+      
+      mouse.x += (mouse.targetX - mouse.x) * 0.1;
+      mouse.y += (mouse.targetY - mouse.y) * 0.1;
+
+      points.forEach(p => p.draw(time));
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      init();
+    });
+
+    init();
+    requestAnimationFrame(animate);
+  }
+</script>

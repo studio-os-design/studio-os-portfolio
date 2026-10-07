@@ -1,7 +1,87 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-    --color-primary : var(--color-indigo-600);
-    --color-secondary : var(--color-orange-600);
-    --color-info : var(--color-blue-600);
+    --color-primary: #1A3636;
+    --color-matcha: #677C69;
+    --color-almond: #D6BC97;
+    --color-forest: #40534C;
+    --color-eclipse: #1A3636;
+
+    --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Bahnschrift", "Segoe UI", "DIN Next LT W01 Regular", "DIN Next LT W01 Condensed", Arial, sans-serif;
+
+    /* Increase base font sizes for better readability */
+    --font-size-sm: 1rem;
+    --font-size-base: 1.125rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 1.875rem;
+    
+    /* Default weight for body font */
+    --font-weight-normal: 500;
+    --font-weight-medium: 600;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #0d1117; /* Darker for better contrast */
+  --grid-color: rgba(203, 213, 225, 0.6); /* Increased from 0.3 */
+  --fluid-gradient: linear-gradient(135deg, #ffffff 0%, #f9fafb 35%, #f3f4f6 70%, #e5e7eb 100%);
+  --point-color: rgba(26, 54, 54, 0.25); /* Increased from 0.1 */
+  --line-color: rgba(26, 54, 54, 0.12);
+  --glow-color: rgba(103, 125, 106, 0.15);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700; /* Increased from 600 for more contrast */
+  letter-spacing: -0.02em;
+}
+
+.dark {
+  --bg-color: #0b1212; /* Even darker background for more contrast */
+  --text-color: #f1f5f9;
+  --grid-color: rgba(45, 55, 63, 0.7);
+  --fluid-gradient: linear-gradient(135deg, #0b1212 0%, #0d1c1c 35%, #132626 70%, #1a3636 100%);
+  --point-color: rgba(131, 150, 132, 0.5);
+  --line-color: rgba(131, 150, 132, 0.15);
+  --glow-color: rgba(131, 150, 132, 0.12);
+
+  /* Dark mode overrides for CI colors to increase contrast against light text */
+  --color-matcha: #4A5D4C;
+  --color-almond: #B09B7A;
+  --color-eclipse: #0b1212; /* Matches --bg-color exactly for seamless header */
+  --color-primary: #0b1212;
+}
+
+@font-face {
+    font-family: "Bahnschrift";
+    src: local("Bahnschrift"), local("Segoe UI"), local("Arial");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DM Sans";
+    src: url("/fonts/dm-sans-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Outfit removed as per user request to go back to Bahnschrift */
+
+@keyframes fluidMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
