@@ -11,13 +11,13 @@ import Container from "./Container.astro";
             class="flex w-full justify-center space-x-12 text-gray-800 dark:text-gray-200 sm:w-7/12 md:justify-start"
           >
             <ul class="space-y-3">
-              <li><a href="#home" class="transition hover:text-almond">Start</a></li>
-              <li><a href="#vermessung" class="transition hover:text-almond">Vermessung</a></li>
-              <li><a href="#visualisierung" class="transition hover:text-almond">3D Visualisierung</a></li>
-              <li><a href="#cad" class="transition hover:text-almond">CAD & Planung</a></li>
-              <li><a href="#bim" class="transition hover:text-almond">BIM</a></li>
-              <li><a href="/studio-profil" class="transition hover:text-almond">Studio Profil</a></li>
-              <li><a href="/impressum-datenschutz" class="transition hover:text-almond">Impressum & Datenschutz</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}#home`} class="transition hover:text-almond">Start</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}#vermessung`} class="transition hover:text-almond">Vermessung</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}#visualisierung`} class="transition hover:text-almond">3D Visualisierung</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}#cad`} class="transition hover:text-almond">CAD & Planung</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}#bim`} class="transition hover:text-almond">BIM</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}studio-profil`} class="transition hover:text-almond">Studio Profil</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}impressum-datenschutz`} class="transition hover:text-almond">Impressum & Datenschutz</a></li>
             </ul>
           </div>
           <div
@@ -30,24 +30,24 @@ import Container from "./Container.astro";
             <span class="block text-gray-600 dark:text-gray-300">© <span id="year"></span> studio-os.de. Alle Rechte vorbehalten.</span>
   
             <span class="flex justify-between text-gray-800 dark:text-white">
-              <a href="/impressum-datenschutz#impressum" class="font-medium hover:text-almond">Impressum</a>
-              <a href="/impressum-datenschutz#datenschutz" class="font-medium hover:text-almond">Datenschutz</a>
+              <a href={`${import.meta.env.BASE_URL}impressum-datenschutz#impressum`} class="font-medium hover:text-almond">Impressum</a>
+              <a href={`${import.meta.env.BASE_URL}impressum-datenschutz#datenschutz`} class="font-medium hover:text-almond">Datenschutz</a>
             </span>
 
             <!-- Social Links -->
             <div class="flex flex-col items-center sm:items-start gap-6 mt-8 pt-8 border-t border-gray-100 dark:border-white/5">
                 <div class="flex gap-6">
                     <a href="https://de.pinterest.com/outlinesshapes/" target="_blank" rel="noopener noreferrer" class="group transition-transform hover:scale-110" aria-label="Pinterest">
-                        <img src="/images/logos/pinterest light.svg" class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
-                        <img src="/images/logos/pinterest dark.svg" class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
+                        <img src={`${import.meta.env.BASE_URL}images/logos/pinterest light.svg`} class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
+                        <img src={`${import.meta.env.BASE_URL}images/logos/pinterest dark.svg`} class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
                     </a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="group transition-transform hover:scale-110" aria-label="Instagram">
-                        <img src="/images/logos/instagram light.svg" class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
-                        <img src="/images/logos/instagram dark.svg" class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                        <img src={`${import.meta.env.BASE_URL}images/logos/instagram light.svg`} class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                        <img src={`${import.meta.env.BASE_URL}images/logos/instagram dark.svg`} class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
                     </a>
                     <a href="https://linkedin.com/in/simeon-ostermann-583964390" target="_blank" rel="noopener noreferrer" class="group transition-transform hover:scale-110" aria-label="LinkedIn">
-                        <img src="/images/logos/linkedin light.svg" class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
-                        <img src="/images/logos/linkedin dark.svg" class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                        <img src={`${import.meta.env.BASE_URL}images/logos/linkedin light.svg`} class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                        <img src={`${import.meta.env.BASE_URL}images/logos/linkedin dark.svg`} class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
                     </a>
                 </div>
                 

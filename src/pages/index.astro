@@ -7,20 +7,20 @@ const projects = [
         title: "Vermessung eines historischen Gebäudes in Bayreuth",
         description: "Detailliertes Aufmaß und digitale Bestandsaufnahme für komplexe Gebäudestrukturen. Klicken zum Erweitern.",
         images: [
-            "/images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1.png",
-            "/images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1_BESTAND.jpg",
-            "/images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1_MODELL.png",
-            "/images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1_PLAENE.png",
+            `${import.meta.env.BASE_URL}images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1.png`,
+            `${import.meta.env.BASE_URL}images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1_BESTAND.jpg`,
+            `${import.meta.env.BASE_URL}images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1_MODELL.png`,
+            `${import.meta.env.BASE_URL}images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1_PLAENE.png`,
         ]
     },
     {
         title: "Vermessung eines Restaurantkomplexes in Nürnberg",
         description: "Präzise Erfassung weitläufiger Gastronomieflächen zur Modernisierungsplanung. Klicken zum Erweitern.",
         images: [
-            "/images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2.png",
-            "/images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2 3D_DATEN_LUFTBILD.png",
-            "/images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2 3D_MODELL.png",
-            "/images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2 PLAENE.png",
+            `${import.meta.env.BASE_URL}images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2.png`,
+            `${import.meta.env.BASE_URL}images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2 3D_DATEN_LUFTBILD.png`,
+            `${import.meta.env.BASE_URL}images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2 3D_MODELL.png`,
+            `${import.meta.env.BASE_URL}images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2 PLAENE.png`,
         ]
     },
     {
@@ -38,15 +38,15 @@ const visualizations = [
         title: "Professionelle Visualisierungen",
         description: "Ob aus bestehenden 2D-Plänen oder mit bereitgestellten Modellen, fotorealistisch oder stilisiert, Foto oder Video - wir setzen ihre Vorstellung um. Klicken zum Erweitern.",
         images: [
-            "/images/renders/RENDER1.jpg",
+            `${import.meta.env.BASE_URL}images/renders/RENDER1.jpg`,
         ]
     },
     {
         title: "Digitales Home-Staging",
         description: "Sie haben eine leere Wohnung- wir zeigen deren volles Potential. Klicken zum Erweitern.",
         images: [
-            "/images/renders/HOMESTAGING1.jpg",
-            "/images/renders/HOMESTAGING2.jpg",
+            `${import.meta.env.BASE_URL}images/renders/HOMESTAGING1.jpg`,
+            `${import.meta.env.BASE_URL}images/renders/HOMESTAGING2.jpg`,
         ]
     }
 ];
@@ -91,8 +91,8 @@ const visualizations = [
                         
                         <!-- Logo (Large, Transparent) -->
                         <div class="relative lg:scale-150 lg:translate-x-12">
-						    <img src="/OS LOGO light.svg" class="w-full max-w-[500px] h-auto opacity-[0.9] dark:hidden transition-all duration-700" id="hero-logo-light" alt="OS Logo light" />
-						    <img src="/OS LOGO dark.svg" class="w-full max-w-[500px] h-auto opacity-[0.9] hidden dark:block transition-all duration-700" id="hero-logo-dark" alt="OS Logo dark" />
+						    <img src={`${import.meta.env.BASE_URL}OS LOGO light.svg`} class="w-full max-w-[500px] h-auto opacity-[0.9] dark:hidden transition-all duration-700" id="hero-logo-light" alt="OS Logo light" />
+						    <img src={`${import.meta.env.BASE_URL}OS LOGO dark.svg`} class="w-full max-w-[500px] h-auto opacity-[0.9] hidden dark:block transition-all duration-700" id="hero-logo-dark" alt="OS Logo dark" />
                         </div>
                         
                         <!-- WebM Animation -->
@@ -105,7 +105,7 @@ const visualizations = [
                                 playsinline 
                                 class="w-full h-full object-contain scale-[2.5] opacity-30 dark:hidden"
                             >
-                                <source src="/animation/animation light.webm" type="video/webm" />
+                                <source src={`${import.meta.env.BASE_URL}animation/animation light.webm`} type="video/webm" />
                             </video>
                             <video 
                                 id="hero-video-dark"
@@ -115,7 +115,7 @@ const visualizations = [
                                 playsinline 
                                 class="w-full h-full object-contain scale-[2.5] opacity-30 hidden dark:block"
                             >
-                                <source src="/animation/animation dark.webm" type="video/webm" />
+                                <source src={`${import.meta.env.BASE_URL}animation/animation dark.webm`} type="video/webm" />
                             </video>
                         </div>
 					</div>
@@ -372,22 +372,22 @@ const visualizations = [
                         <div class="flex flex-wrap justify-center gap-8 md:gap-16">
                             <a href="https://de.pinterest.com/outlinesshapes/" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 transition-all hover:-translate-y-2">
                                 <div class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-almond/50 shadow-xl overflow-hidden">
-                                    <img src="/images/logos/pinterest light.svg" class="w-10 h-10 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
-                                    <img src="/images/logos/pinterest dark.svg" class="w-10 h-10 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
+                                    <img src={`${import.meta.env.BASE_URL}images/logos/pinterest light.svg`} class="w-10 h-10 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
+                                    <img src={`${import.meta.env.BASE_URL}images/logos/pinterest dark.svg`} class="w-10 h-10 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
                                 </div>
                                 <span class="text-sm font-heading font-bold text-gray-500 group-hover:text-white transition-colors">Pinterest</span>
                             </a>
                             <a href="https://instagram.com/outlines_studio_shapes/" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 transition-all hover:-translate-y-2">
                                 <div class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-almond/50 shadow-xl overflow-hidden">
-                                    <img src="/images/logos/instagram light.svg" class="w-10 h-10 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
-                                    <img src="/images/logos/instagram dark.svg" class="w-10 h-10 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                                    <img src={`${import.meta.env.BASE_URL}images/logos/instagram light.svg`} class="w-10 h-10 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                                    <img src={`${import.meta.env.BASE_URL}images/logos/instagram dark.svg`} class="w-10 h-10 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
                                 </div>
                                 <span class="text-sm font-heading font-bold text-gray-500 group-hover:text-white transition-colors">Instagram</span>
                             </a>
                             <a href="https://linkedin.com/in/simeon-ostermann-583964390" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 transition-all hover:-translate-y-2">
                                 <div class="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-almond/50 shadow-xl overflow-hidden">
-                                    <img src="/images/logos/linkedin light.svg" class="w-10 h-10 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
-                                    <img src="/images/logos/linkedin dark.svg" class="w-10 h-10 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                                    <img src={`${import.meta.env.BASE_URL}images/logos/linkedin light.svg`} class="w-10 h-10 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                                    <img src={`${import.meta.env.BASE_URL}images/logos/linkedin dark.svg`} class="w-10 h-10 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
                                 </div>
                                 <span class="text-sm font-heading font-bold text-gray-500 group-hover:text-white transition-colors">LinkedIn</span>
                             </a>
