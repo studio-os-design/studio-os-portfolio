@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @font-face {
     font-family: "DM Sans";
-    src: url("../public/fonts/dm-sans-regular.woff2") format("woff2");
+    src: url("./fonts/dm-sans-regular.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;

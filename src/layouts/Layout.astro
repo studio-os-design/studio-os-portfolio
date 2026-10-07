@@ -15,7 +15,7 @@ const {
 	title = "studio-os.de | Vermessung, CAD-Planung & BIM-Modellierung",
 	description = "Professionelle Gebäudevermessung, 2D/3D Bestandspläne und BIM-Modelle. studio-os bietet zentimetergenaue Bestandserfassung und hochwertige 3D-Visualisierung für Architekten und Bauherren.",
 	keywords = "Vermessung, Digitales Aufmaß, Bestandsaufnahme, Bestandspläne, CAD-Planung, BIM, Building Information Modeling, 3D-Design, Architekturvisualisierung",
-	image = "/images/profile/PROFILE.webp"
+	image = import.meta.env.BASE_URL + "images/profile/PROFILE.webp"
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -41,14 +41,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <meta property="og:url" content={Astro.url} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={new URL(image, Astro.url)} />
+        <meta property="og:image" content={new URL(image, Astro.site)} />
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={Astro.url} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content={new URL(image, Astro.url)} />
+        <meta property="twitter:image" content={new URL(image, Astro.site)} />
 
         <!-- JSON-LD Structured Data -->
         <script type="application/ld+json">

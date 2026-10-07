@@ -5,6 +5,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://studio-os.de',
+  base: '/',
   output : "static",
   integrations: [sitemap()],
   vite:{
