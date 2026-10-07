@@ -170,9 +170,9 @@ const visualizations = [
 					</div>
 					
 					<!-- Interactive Portfolio Grid -->
-					<div class="mt-6 flex gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
+					<div class="mt-6 flex flex-col sm:flex-row gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
 						{projects.map((project) => (
-							<div class="group group/card relative flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-hidden transition-all duration-700 ease-in-out h-[350px] hover:h-[450px] data-[expanded=true]:h-[600px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
+							<div class="group group/card relative flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-hidden transition-all duration-700 ease-in-out h-[350px] hover:h-[450px] data-[expanded=true]:h-[600px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:h-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
                                 <!-- Slideshow Container -->
                                 <div class="absolute inset-0 w-full h-full slideshow-container">
                                     {project.images.map((img, idx) => (
@@ -233,9 +233,9 @@ const visualizations = [
 					</div>
 					
 					<!-- Bild-Container -->
-					<div class="mt-16 flex gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
+					<div class="mt-16 flex flex-col md:flex-row gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
 						{visualizations.map((project) => (
-							<div class="group group/card relative flex-shrink-0 w-full md:w-1/2 overflow-hidden transition-all duration-700 ease-in-out h-[350px] md:h-[450px] hover:h-[550px] data-[expanded=true]:h-[650px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
+							<div class="group group/card relative flex-shrink-0 w-full md:w-1/2 overflow-hidden transition-all duration-700 ease-in-out h-[350px] md:h-[450px] hover:h-[550px] data-[expanded=true]:h-[650px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:h-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
 								<!-- Slideshow Container -->
                                 <div class="absolute inset-0 w-full h-full slideshow-container">
                                     {project.images.map((img, idx) => (
