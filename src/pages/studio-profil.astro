@@ -1,6 +1,17 @@
 ---
 import Container from "../components/Container.astro";
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+import profileImg from "../assets/images/profile/PROFILE.webp";
+import signatureLight from "../assets/images/profile/UNTERSCHRIFT light.webp";
+import signatureDark from "../assets/images/profile/UNTERSCHRIFT dark.webp";
+import pinterestLight from "../assets/images/logos/pinterest light.svg";
+import pinterestDark from "../assets/images/logos/pinterest dark.svg";
+import instagramLight from "../assets/images/logos/instagram light.svg";
+import instagramDark from "../assets/images/logos/instagram dark.svg";
+import linkedinLight from "../assets/images/logos/linkedin light.svg";
+import linkedinDark from "../assets/images/logos/linkedin dark.svg";
 ---
 
 <Layout 
@@ -17,7 +28,7 @@ import Layout from "../layouts/Layout.astro";
                         <div class="relative group">
                             <!-- Image (Smaller, No Box) -->
                             <div class="relative z-10">
-                                <img src={`${import.meta.env.BASE_URL}images/profile/PROFILE.webp`} class="w-full h-auto rounded-[2.5rem] transition-transform duration-700 group-hover:scale-105" alt="Simeon Ostermann" />
+                                <Image src={profileImg} class="w-full h-auto rounded-[2.5rem] transition-transform duration-700 group-hover:scale-105" alt="Simeon Ostermann" loading="eager" fetchpriority="high" />
                             </div>
                             <!-- Dark Mode Glow -->
                             <div class="absolute inset-0 bg-matcha/30 blur-[80px] rounded-full scale-110 opacity-0 dark:opacity-100 -z-10 transition-opacity duration-700"></div>
@@ -83,8 +94,8 @@ import Layout from "../layouts/Layout.astro";
 
                             <div class="w-full mt-auto">
                                 <!-- Signature Images (Full Width) -->
-                                <img src={`${import.meta.env.BASE_URL}images/profile/UNTERSCHRIFT light.webp`} class="w-full h-auto dark:hidden" alt="Unterschrift Simeon Ostermann" />
-                                <img src={`${import.meta.env.BASE_URL}images/profile/UNTERSCHRIFT dark.webp`} class="w-full h-auto hidden dark:block" alt="Unterschrift Simeon Ostermann" />
+                                <Image src={signatureLight} class="w-full h-auto dark:hidden" alt="Unterschrift Simeon Ostermann" />
+                                <Image src={signatureDark} class="w-full h-auto hidden dark:block" alt="Unterschrift Simeon Ostermann" />
                             </div>
                         </section>
                     </div>
@@ -103,22 +114,22 @@ import Layout from "../layouts/Layout.astro";
                     <div class="flex flex-wrap justify-center gap-8 md:gap-12">
                         <a href="https://de.pinterest.com/outlinesshapes/" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
                             <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-almond/50 shadow-xl overflow-hidden">
-                                <img src={`${import.meta.env.BASE_URL}images/logos/pinterest light.svg`} class="w-8 h-8 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg] font-heading" alt="Pinterest" />
-                                <img src={`${import.meta.env.BASE_URL}images/logos/pinterest dark.svg`} class="w-8 h-8 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
+                                <Image src={pinterestLight} class="w-8 h-8 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg] font-heading" alt="Pinterest" />
+                                <Image src={pinterestDark} class="w-8 h-8 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
                             </div>
                             <span class="text-xs font-heading font-bold text-gray-500 group-hover:text-white transition-colors">Pinterest</span>
                         </a>
                         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
                             <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-almond/50 shadow-xl overflow-hidden">
-                                <img src={`${import.meta.env.BASE_URL}images/logos/instagram light.svg`} class="w-8 h-8 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
-                                <img src={`${import.meta.env.BASE_URL}images/logos/instagram dark.svg`} class="w-8 h-8 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                                <Image src={instagramLight} class="w-8 h-8 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                                <Image src={instagramDark} class="w-8 h-8 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
                             </div>
                             <span class="text-xs font-heading font-bold text-gray-500 group-hover:text-white transition-colors">Instagram</span>
                         </a>
                         <a href="https://linkedin.com/in/simeon-ostermann-583964390" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
                             <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-colors group-hover:border-almond/50 shadow-xl overflow-hidden">
-                                <img src={`${import.meta.env.BASE_URL}images/logos/linkedin light.svg`} class="w-8 h-8 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
-                                <img src={`${import.meta.env.BASE_URL}images/logos/linkedin dark.svg`} class="w-8 h-8 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                                <Image src={linkedinLight} class="w-8 h-8 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                                <Image src={linkedinDark} class="w-8 h-8 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
                             </div>
                             <span class="text-xs font-heading font-bold text-gray-500 group-hover:text-white transition-colors">LinkedIn</span>
                         </a>

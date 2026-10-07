@@ -1,6 +1,12 @@
 ---
 import Container from "./Container.astro";
-
+import { Image } from "astro:assets";
+import pinterestLight from "../assets/images/logos/pinterest light.svg";
+import pinterestDark from "../assets/images/logos/pinterest dark.svg";
+import instagramLight from "../assets/images/logos/instagram light.svg";
+import instagramDark from "../assets/images/logos/instagram dark.svg";
+import linkedinLight from "../assets/images/logos/linkedin light.svg";
+import linkedinDark from "../assets/images/logos/linkedin dark.svg";
 ---
 
 <footer class="py-20 md:py-40 snap-start">
@@ -38,16 +44,16 @@ import Container from "./Container.astro";
             <div class="flex flex-col items-center sm:items-start gap-6 mt-8 pt-8 border-t border-gray-100 dark:border-white/5">
                 <div class="flex gap-6">
                     <a href="https://de.pinterest.com/outlinesshapes/" target="_blank" rel="noopener noreferrer" class="group transition-transform hover:scale-110" aria-label="Pinterest">
-                        <img src={`${import.meta.env.BASE_URL}images/logos/pinterest light.svg`} class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
-                        <img src={`${import.meta.env.BASE_URL}images/logos/pinterest dark.svg`} class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
+                        <Image src={pinterestLight} class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
+                        <Image src={pinterestDark} class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Pinterest" />
                     </a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="group transition-transform hover:scale-110" aria-label="Instagram">
-                        <img src={`${import.meta.env.BASE_URL}images/logos/instagram light.svg`} class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
-                        <img src={`${import.meta.env.BASE_URL}images/logos/instagram dark.svg`} class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                        <Image src={instagramLight} class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
+                        <Image src={instagramDark} class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="Instagram" />
                     </a>
                     <a href="https://linkedin.com/in/simeon-ostermann-583964390" target="_blank" rel="noopener noreferrer" class="group transition-transform hover:scale-110" aria-label="LinkedIn">
-                        <img src={`${import.meta.env.BASE_URL}images/logos/linkedin light.svg`} class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
-                        <img src={`${import.meta.env.BASE_URL}images/logos/linkedin dark.svg`} class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                        <Image src={linkedinLight} class="w-6 h-6 dark:hidden transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
+                        <Image src={linkedinDark} class="w-6 h-6 hidden dark:block transition-all group-hover:brightness-0 group-hover:sepia group-hover:saturate-[10] group-hover:hue-rotate-[350deg]" alt="LinkedIn" />
                     </a>
                 </div>
                 
