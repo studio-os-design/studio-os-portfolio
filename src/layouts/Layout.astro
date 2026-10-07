@@ -3,17 +3,96 @@ import AppFooter from "../components/AppFooter.astro";
 import AppHeader from "../components/AppHeader.astro";
 import Background from "../components/Background.astro";
 import "./../tailus.css"
+
+interface Props {
+	title?: string;
+	description?: string;
+	keywords?: string;
+	image?: string;
+}
+
+const { 
+	title = "studio-os.de | Vermessung, CAD-Planung & BIM-Modellierung",
+	description = "Professionelle Gebäudevermessung, 2D/3D Bestandspläne und BIM-Modelle. studio-os bietet zentimetergenaue Bestandserfassung und hochwertige 3D-Visualisierung für Architekten und Bauherren.",
+	keywords = "Vermessung, Digitales Aufmaß, Bestandsaufnahme, Bestandspläne, CAD-Planung, BIM, Building Information Modeling, 3D-Design, Architekturvisualisierung",
+	image = "/images/profile/PROFILE.webp"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="de" class="scroll-smooth">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+        <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon light.svg`} />
         <meta name="generator" content={Astro.generator} />
-        <meta name="description" content="Template built with tailwindcss using Tailus blocks v2" />
-        <title>studio-os.de</title>
+        
+        <!-- Primary Meta Tags -->
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.url)} />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={Astro.url} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "studio-os",
+              "image": "https://studio-os.de/images/profile/PROFILE.webp",
+              "@id": "https://studio-os.de",
+              "url": "https://studio-os.de",
+              "telephone": "+4915156174518",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Bayreuth",
+                "addressLocality": "Bayreuth",
+                "postalCode": "95444",
+                "addressCountry": "DE"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 49.9456,
+                "longitude": 11.5713
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "09:00",
+                "closes": "18:00"
+              },
+              "sameAs": [
+                "https://instagram.com/outlines_studio_shapes/",
+                "https://linkedin.com/in/simeon-ostermann-583964390",
+                "https://de.pinterest.com/outlinesshapes/"
+              ],
+              "description": "Expertise in Vermessung, CAD-Planung, BIM-Modellierung und 3D-Visualisierung."
+            }
+        </script>
+
         <script is:inline>
             if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
