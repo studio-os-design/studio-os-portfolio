@@ -9,7 +9,7 @@ import linkedinLight from "../assets/images/logos/linkedin light.svg";
 import linkedinDark from "../assets/images/logos/linkedin dark.svg";
 ---
 
-<footer class="py-20 md:py-40 snap-start">
+<footer class="py-20 md:py-40">
     <Container>
       <div class="m-auto md:w-10/12 lg:w-8/12 xl:w-6/12">
         <div class="flex flex-wrap items-center justify-between md:flex-nowrap">
@@ -35,7 +35,11 @@ import linkedinDark from "../assets/images/logos/linkedin dark.svg";
   
             <span class="block text-gray-600 dark:text-gray-300">© <span id="year"></span> studio-os.de. Alle Rechte vorbehalten.</span>
   
-            <span class="flex justify-between text-gray-800 dark:text-white">
+            <p class="text-[10px] leading-relaxed text-gray-500 dark:text-gray-400 mt-4">
+                Autodesk, AutoCAD, Revit, ArchiCAD, Vectorworks, Allplan und BricsCAD sind eingetragene Marken ihrer jeweiligen Eigentümer. Studio OUTLINES/SHAPES ist ein unabhängiger Dienstleister und steht in keiner Verbindung zu diesen Unternehmen und wird von diesen auch nicht unterstützt.
+            </p>
+
+            <span class="flex justify-between text-gray-800 dark:text-white mt-6">
               <a href={`${import.meta.env.BASE_URL}impressum-datenschutz#impressum`} class="font-medium hover:text-almond">Impressum</a>
               <a href={`${import.meta.env.BASE_URL}impressum-datenschutz#datenschutz`} class="font-medium hover:text-almond">Datenschutz</a>
             </span>

@@ -1,6 +1,7 @@
 ---
 import Container from '../components/Container.astro';
 import Layout from '../layouts/Layout.astro';
+import SoftwareCarousel from '../components/SoftwareCarousel.astro';
 import { Image } from 'astro:assets';
 
 import osLogoLight from '../assets/OS LOGO light.svg';
@@ -67,20 +68,52 @@ const visualizations = [
 	description="Experte für Gebäudevermessung, digitales Aufmaß und BIM-konforme 3D-Modelle. Wir bieten zentimetergenaue Bestandserfassung, CAD-Konstruktion und fotorealistische Visualisierung."
 	keywords="Vermessung, Digitales Aufmaß, Bestandsaufnahme, Zentimetergenaue Bestandserfassung, Bestandspläne, Planzeichnung, 2D/3D Bestandsdokumentation, Grundrisse, Schnitte, Ansichten, CAD-Planung, Bauplanung, Computer-Aided Design, Bauzeichnung, CAD-Konstruktion, BIM, Building Information Modeling, BIM-Modellierung, Industry Foundation Classes, IFC, BIM-Konformität, Visualisierung, 3D-Design, 3D-Architekturvisualisierung, Rendering, Digital Twins, Räumliche Darstellung"
 >
-	<main class="overflow-hidden">
+	<main class="overflow-x-hidden">
 		<!-- Hero Section -->
-		<div class="relative min-h-screen flex items-center transition-all duration-700 ease-in-out snap-start" id="home">
+		<div class="relative min-h-dvh flex flex-col transition-all duration-700 ease-in-out snap-start" id="home">
 			<div aria-hidden="true" class="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-50 dark:opacity-30">
 				<div class="blur-[106px] h-64 bg-gradient-to-br from-matcha to-forest hidden dark:block dark:from-matcha/40"></div>
 				<div class="blur-[106px] h-40 bg-gradient-to-r from-almond to-matcha hidden dark:block dark:to-forest/50"></div>
 			</div>
-			<Container>
-				<div class="relative flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24 transition-all duration-700 zoom-content" id="hero-content">
-					<div class="w-full lg:w-[45%] text-left reveal z-10">
-						<h1 class="text-gray-900 dark:text-white font-bold text-4xl md:text-5xl xl:text-6xl font-heading leading-tight transition-all duration-700" id="hero-title">
+			<Container class="flex-[8.5] flex flex-col pt-24 md:pt-32 pb-8 md:pb-12">
+				<div class="relative flex flex-col lg:flex-row items-start lg:items-center justify-center lg:justify-between gap-12 lg:gap-24 transition-all duration-700 zoom-content flex-1 w-full" id="hero-content">
+                    <!-- Background Animation & Bokeh -->
+                    <div class="absolute inset-0 pointer-events-none z-0">
+                        <!-- Bokeh Effect -->
+                        <div class="absolute top-1/2 left-[70%] -translate-x-1/2 -translate-y-1/2 blur-[120px] bg-matcha/20 rounded-full scale-[2] w-64 h-64 lg:w-96 lg:h-96"></div>
+                        
+                        <!-- WebM Animation -->
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="absolute left-[80%] -translate-x-1/2 w-[300px] h-[300px] flex items-center justify-center">
+                                <video 
+                                    id="hero-video-light-bg"
+                                    autoplay 
+                                    loop 
+                                    muted 
+                                    playsinline 
+                                    class="w-full h-full object-contain scale-[0.1] opacity-20 dark:hidden"
+                                >
+                                    <source src={`${import.meta.env.BASE_URL}animation/animation light.webm`} type="video/webm" />
+                                </video>
+                                <video 
+                                    id="hero-video-dark-bg"
+                                    autoplay 
+                                    loop 
+                                    muted 
+                                    playsinline 
+                                    class="w-full h-full object-contain scale-[2.5] opacity-20 hidden dark:block"
+                                >
+                                    <source src={`${import.meta.env.BASE_URL}animation/animation dark.webm`} type="video/webm" />
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+					<div class="w-full lg:w-[45%] text-left reveal z-10 flex flex-col justify-center h-full">
+						<h1 class="text-gray-900 dark:text-white font-bold text-3xl md:text-4xl xl:text-5xl font-heading leading-tight transition-all duration-700" id="hero-title">
 							Präzise Vermessung <br/> & 3D-Planung für <br/> Ihre Projekte
 						</h1>
-						<p class="mt-8 text-gray-700 dark:text-gray-300 text-lg lg:text-xl max-w-xl transition-all duration-700" id="hero-text">
+						<p class="mt-8 text-gray-700 dark:text-gray-300 text-base lg:text-lg max-w-xl transition-all duration-700" id="hero-text">
 							Unser Ziel ist Ihr reibungsloser Workflow für sämtliche CAD- und 3D-Projekte. Basierend auf BIM-Methodik erstellen wir alles vom 2D-Bestandsplan bis zum 3D-Modell.<br><br>Vergessen Sie dabei das lästige Konvertieren von Fremddateien: Auf Wunsch erhalten Sie alle Projektdaten visuell konsistent und direkt im nativen Format Ihrer Software – einfach öffnen und weiterarbeiten!						</p>
 						<div class="mt-12 flex flex-wrap gap-y-4 gap-x-6">
 							<a
@@ -98,46 +131,24 @@ const visualizations = [
 						</div>
 					</div>
 
-					<div class="w-full lg:w-[55%] flex flex-col items-center lg:items-end justify-center reveal relative">
-                        <!-- Bokeh Effect -->
-                        <div class="absolute inset-0 blur-[120px] bg-matcha/20 rounded-full scale-150 -z-10"></div>
-                        
+					<div class="w-full lg:w-[55%] hidden lg:flex flex-col items-center lg:items-end justify-center reveal relative z-10">
                         <!-- Logo (Large, Transparent) -->
-                        <div class="relative lg:scale-150 lg:translate-x-12">
-						    <Image src={osLogoLight} class="w-full max-w-[500px] h-auto opacity-[0.9] dark:hidden transition-all duration-700" id="hero-logo-light" alt="OS Logo light" loading="eager" fetchpriority="high" />
-						    <Image src={osLogoDark} class="w-full max-w-[500px] h-auto opacity-[0.9] hidden dark:block transition-all duration-700" id="hero-logo-dark" alt="OS Logo dark" loading="eager" fetchpriority="high" />
-                        </div>
-                        
-                        <!-- WebM Animation -->
-                        <div class="absolute inset-0 flex items-center justify-right pointer-events-none lg:translate-x-30">
-                            <video 
-                                id="hero-video-light"
-                                autoplay 
-                                loop 
-                                muted 
-                                playsinline 
-                                class="w-full h-full object-contain scale-[2.5] opacity-30 dark:hidden"
-                            >
-                                <source src={`${import.meta.env.BASE_URL}animation/animation light.webm`} type="video/webm" />
-                            </video>
-                            <video 
-                                id="hero-video-dark"
-                                autoplay 
-                                loop 
-                                muted 
-                                playsinline 
-                                class="w-full h-full object-contain scale-[2.5] opacity-30 hidden dark:block"
-                            >
-                                <source src={`${import.meta.env.BASE_URL}animation/animation dark.webm`} type="video/webm" />
-                            </video>
+                        <div class="relative lg:scale-110 lg:translate-x-12">
+						    <Image src={osLogoLight} class="w-full max-w-[500px] h-auto opacity-[0.9] dark:hidden transition-all duration-700" id="hero-logo-light" alt="studio-os.de - Expert for Vectorworks, Archicad & BIM Planning" loading="eager" fetchpriority="high" />
+						    <Image src={osLogoDark} class="w-full max-w-[500px] h-auto opacity-[0.9] hidden dark:block transition-all duration-700" id="hero-logo-dark" alt="studio-os.de - Expert for Vectorworks, Archicad & BIM Planning" loading="eager" fetchpriority="high" />
                         </div>
 					</div>
 				</div>
 			</Container>
+
+            <!-- Software Carousel (Outside container for true window centering) -->
+            <div class="reveal w-full flex-[1.5] flex items-center justify-center">
+                <SoftwareCarousel />
+            </div>
 		</div>
 
 		<!-- Vermessung Section -->
-		<div id="vermessung" class="relative min-h-screen flex items-center bg-black/5 dark:bg-black/20 py-24 snap-start">
+		<div id="vermessung" class="relative min-h-dvh flex items-center bg-black/5 dark:bg-black/20 py-16 md:py-8 snap-start">
 			<Container>
 				<div class="zoom-content">
 					<div class="md:w-2/3 lg:w-1/2 reveal">
@@ -145,16 +156,16 @@ const visualizations = [
 							Gebäudevermessung & Digitales Aufmaß
 						</h2>
 
-						<p class="my-8 text-gray-700 dark:text-gray-200">
+						<p class="my-4 text-gray-700 dark:text-gray-200">
 							Für Architekturbüros, Makler und Bauherren erfassen wir Bestandsobjekte mit modernster Technik zentimetergenau. Um Ihnen einen reibungslosen Start in die Planung zu garantieren, setzen wir auf drei Prinzipien:
 						</p>
-						<ul class="list-disc pl-6 mb-12 space-y-4 text-gray-700 dark:text-gray-200">
+						<ul class="list-disc pl-6 mb-6 space-y-1 text-gray-700 dark:text-gray-200 max-w-xl">
 							<li><strong>Verformungsgerechte Aufmaße:</strong> Eine hochpräzise und zuverlässige Erfassung der realen Bausubstanz.</li>
-  							<li><strong>Konsequent in 3D &amp; BIM:</strong> Jeder unserer Arbeitsschritte liefert Ihnen ein zukunftssicheres, intelligentes 3D-Modell.</li>
-  							<li><strong>Sofort startklar:</strong> Sie erhalten auf Wunsch native Daten für Ihr bevorzugtes CAD-System, die ohne weitere Anpassungen direkt von Ihnen genutzt werden können.</li>
+							<li><strong>Konsequent in 3D &amp; BIM:</strong> Jeder unserer Arbeitsschritte liefert Ihnen ein zukunftssicheres, intelligentes 3D-Modell.</li>
+							<li><strong>Sofort startklar:</strong> Sie erhalten auf Wunsch native Daten für Ihr bevorzugtes CAD-System, die ohne weitere Anpassungen direkt von Ihnen genutzt werden können.</li>
 						</ul>
 
-						<h3 class="text-4xl font-bold text-gray-900 dark:text-white md:text-2xl font-heading">
+						<h3 class="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl font-heading">
 							Referenzprojekte
 						</h3>
 					</div>
@@ -162,21 +173,21 @@ const visualizations = [
 					<!-- Interactive Portfolio Grid -->
 					<div class="mt-6 flex flex-col sm:flex-row gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
 						{projects.map((project) => (
-							<div class="group group/card relative flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-hidden transition-all duration-700 ease-in-out h-[350px] hover:h-[450px] data-[expanded=true]:h-[600px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:h-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
+							<div class="group group/card relative flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-hidden transition-all duration-700 ease-in-out h-[300px] hover:h-[350px] data-[expanded=true]:h-[450px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:h-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
                                 <!-- Slideshow Container -->
                                 <div class="absolute inset-0 w-full h-full slideshow-container">
                                     {project.images.map((img, idx) => (
                                         typeof img === 'string' ? (
                                             <img 
                                                 src={img} 
-                                                alt={`${project.title} - Bild ${idx + 1}`} 
+                                                alt={`${project.title} - Professionelle Bestandsaufnahme und 3D-Modellierung`} 
                                                 class={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105 slide ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
                                                 data-index={idx}
                                             />
                                         ) : (
                                             <Image 
                                                 src={img} 
-                                                alt={`${project.title} - Bild ${idx + 1}`} 
+                                                alt={`${project.title} - Digitale Bestandsaufnahme und BIM-Planung`} 
                                                 class={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105 slide ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
                                                 data-index={idx}
                                             />
@@ -210,35 +221,35 @@ const visualizations = [
 		</div>
 
 		<!-- Visualisierung Section -->
-		<div id="visualisierung" class="relative min-h-screen flex items-center py-24 snap-start">
+		<div id="visualisierung" class="relative min-h-dvh flex items-center py-16 md:py-12 snap-start">
 			<Container>
 				<div class="zoom-content">
 					<div class="md:w-2/3 lg:w-1/2 reveal">
 						<h2 class="text-4xl font-bold text-gray-900 dark:text-white md:text-5xl font-heading">
 							3D Visualisierung & Bildmontagen
 						</h2>
-						<p class="my-8 text-gray-700 dark:text-gray-200">
+						<p class="my-6 text-gray-700 dark:text-gray-200">
 							Erwecken Sie Ihre Projekte schon vor dem ersten Spatenstich zum Leben! Mit hochwertigem Bildmaterial machen wir Ihre Planungen greifbar – eine ideale Unterstützung, um <strong>Kunden oder Investoren zu überzeugen</strong> und die Vermarktung zu beschleunigen.						</p>
 					</div>
 					
 					<!-- Bild-Container -->
-					<div class="mt-16 flex flex-col md:flex-row gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
+					<div class="mt-8 flex flex-col md:flex-row gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
 						{visualizations.map((project) => (
-							<div class="group group/card relative flex-shrink-0 w-full md:w-1/2 overflow-hidden transition-all duration-700 ease-in-out h-[350px] md:h-[450px] hover:h-[550px] data-[expanded=true]:h-[650px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:h-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
+							<div class="group group/card relative flex-shrink-0 w-full md:w-1/2 overflow-hidden transition-all duration-700 ease-in-out h-[300px] md:h-[350px] hover:h-[400px] data-[expanded=true]:h-[500px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:h-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
 								<!-- Slideshow Container -->
                                 <div class="absolute inset-0 w-full h-full slideshow-container">
                                     {project.images.map((img, idx) => (
                                         typeof img === 'string' ? (
                                             <img 
                                                 src={img} 
-                                                alt={`${project.title} - Bild ${idx + 1}`} 
+                                                alt={`${project.title} - Professionelle Bestandsaufnahme und 3D-Modellierung`} 
                                                 class={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105 slide ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
                                                 data-index={idx}
                                             />
                                         ) : (
                                             <Image 
                                                 src={img} 
-                                                alt={`${project.title} - Bild ${idx + 1}`} 
+                                                alt={`${project.title} - Digitale Bestandsaufnahme und BIM-Planung`} 
                                                 class={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105 slide ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
                                                 data-index={idx}
                                             />
@@ -274,7 +285,7 @@ const visualizations = [
 		</div>
 
 		<!-- CAD Section -->
-		<div id="cad" class="relative min-h-screen flex items-center bg-black/5 dark:bg-black/20 py-32 md:py-48 snap-start">
+		<div id="cad" class="relative min-h-dvh flex items-center bg-black/5 dark:bg-black/20 py-16 md:py-24 snap-start">
 			<Container>
 				<div class="zoom-content w-full">
 					<div class="flex flex-col-reverse items-center gap-16 lg:flex-row reveal">
@@ -295,11 +306,11 @@ const visualizations = [
 								</div>
 							</div>
 						</div>
-						<div class="lg:w-1/2">
+						<div class="lg:w-1/2 w-full">
 							<Image 
 								src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1200&q=80" 
-								alt="CAD Zeichnung" 
-								class="rounded-3xl shadow-2xl"
+								alt="CAD Bestandsaufnahme und Planerstellung in Vectorworks, Archicad und AutoCAD" 
+								class="rounded-3xl shadow-2xl w-full max-h-[500px] object-cover"
                                 width={1200}
                                 height={800}
 							/>
@@ -310,15 +321,15 @@ const visualizations = [
 		</div>
 
 		<!-- BIM Section -->
-		<div id="bim" class="relative min-h-screen flex items-center py-32 md:py-48 snap-start">
+		<div id="bim" class="relative min-h-dvh flex items-center py-16 md:py-24 snap-start">
 			<Container>
 				<div class="zoom-content w-full">
 					<div class="flex flex-col items-center gap-16 lg:flex-row reveal">
-						<div class="lg:w-1/2">
+						<div class="lg:w-1/2 w-full">
 							<Image 
 								src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" 
-								alt="BIM Modell" 
-								class="rounded-3xl shadow-2xl"
+								alt="BIM Modellierung und IFC Datenaustausch für Architekten und Bauherren" 
+								class="rounded-3xl shadow-2xl w-full max-h-[500px] object-cover"
                                 width={1200}
                                 height={800}
 							/>
@@ -346,10 +357,10 @@ const visualizations = [
 		</div>
 
 		<!-- Kontakt Section -->
-		<div id="kontakt" class="relative min-h-screen flex items-center bg-black/5 dark:bg-black/40 py-32 md:py-48 snap-start">
+		<div id="kontakt" class="relative min-h-dvh flex items-center bg-black/5 dark:bg-black/40 py-16 md:py-24 snap-start">
 			<Container>
 				<div class="zoom-content w-full flex flex-col items-center">
-					<div class="w-full rounded-[3rem] bg-white dark:bg-[#060D0D] p-12 md:p-24 border border-black/10 dark:border-white/10 overflow-hidden relative reveal shadow-2xl">
+					<div class="w-full rounded-[3rem] bg-white dark:bg-[#060D0D] px-6 py-12 md:p-24 border border-black/10 dark:border-white/10 overflow-hidden relative reveal shadow-2xl">
 						<div class="absolute top-0 right-0 -translate-y-12 translate-x-12 blur-[200px] opacity-40">
 							<div class="h-[40rem] w-[40rem] rounded-full bg-matcha"></div>
 						</div>
@@ -363,16 +374,16 @@ const visualizations = [
 								</p>
 							</div>
 							<div class="flex flex-col items-center gap-10 w-full lg:w-auto">
-								<div class="flex flex-col gap-6 sm:flex-row w-full lg:w-auto">
+								<div class="flex flex-col gap-6 sm:flex-row w-full lg:w-auto items-center justify-center">
 									<a
 									  href="mailto:design@studio-os.de"
-									  class="flex h-14 items-center justify-center px-12 rounded-full bg-almond text-eclipse font-bold text-lg transition hover:scale-105 active:scale-95 shadow-lg shadow-almond/20 whitespace-nowrap"
+									  class="flex h-14 items-center justify-center px-12 rounded-full bg-almond text-eclipse font-bold text-lg transition hover:scale-105 active:scale-95 shadow-lg shadow-almond/20 whitespace-nowrap w-full sm:w-max"
 									>
 									  E-Mail schreiben
 									</a>
 									<a
 									  href="tel:+4915156174518"
-									  class="flex h-14 items-center justify-center px-12 rounded-full border border-black/20 dark:border-white/20 text-gray-900 dark:text-white font-bold text-lg transition hover:bg-black/5 dark:hover:bg-white/5 active:scale-95 whitespace-nowrap"
+									  class="flex h-14 items-center justify-center px-12 rounded-full border border-black/20 dark:border-white/20 text-gray-900 dark:text-white font-bold text-lg transition hover:bg-black/5 dark:hover:bg-white/5 active:scale-95 whitespace-nowrap w-full sm:w-max"
 									>
 									  Anrufen
 									</a>
@@ -434,13 +445,22 @@ const visualizations = [
 	}
 
     .zoom-content {
-        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        transform: scale(0.9);
+        transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
         width: 100%;
+        opacity: 1;
+        transform: scale(1);
     }
 
-    .snap-start.active-section .zoom-content {
-        transform: scale(1);
+    @media (prefers-reduced-motion: no-preference) {
+        .zoom-content {
+            opacity: 0;
+            transform: scale(0.92);
+        }
+        
+        .snap-start.active-section .zoom-content {
+            transform: scale(1);
+            opacity: 1;
+        }
     }
 </style>
 
@@ -453,8 +473,8 @@ const visualizations = [
 
     const sectionOptions = {
         root: null,
-        rootMargin: '-10% 0px -10% 0px',
-        threshold: 0.4
+        rootMargin: '0px',
+        threshold: 0.1
     };
 
 	const observer = new IntersectionObserver((entries) => {

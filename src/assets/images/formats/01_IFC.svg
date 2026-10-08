@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 120 120"
+   width="100%"
+   height="100%"
+   version="1.1"
+   id="svg2"
+   sodipodi:docname="IFC.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="2.3570226"
+     inkscape:cx="57.699913"
+     inkscape:cy="108.82373"
+     inkscape:window-width="1920"
+     inkscape:window-height="1131"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <!-- Background with subtle gradient -->
+  <defs
+     id="defs2">
+    <linearGradient
+       id="ifcGrad"
+       x1="0%"
+       y1="0%"
+       x2="100%"
+       y2="100%">
+      <stop
+         offset="0%"
+         style="stop-color:#005b9f;stop-opacity:1"
+         id="stop1" />
+      <stop
+         offset="100%"
+         style="stop-color:#003f73;stop-opacity:1"
+         id="stop2" />
+    </linearGradient>
+  </defs>
+  <rect
+     width="120"
+     height="120"
+     rx="24"
+     fill="url(#ifcGrad)"
+     id="rect2" />
+  <!-- "IFC" Text -->
+  <path
+     d="M 29.936035,66 V 39.856445 h 5.473633 V 66 Z m 18.03125,-21.913086 v 8.089844 h 13.37793 v 4.230469 H 47.967285 V 66 H 42.493652 V 39.856445 h 19.278321 v 4.230469 z m 31.947266,17.979492 q 4.954101,0 6.883789,-4.972656 l 4.768555,1.799805 q -1.54004,3.785156 -4.527344,5.640625 -2.96875,1.836914 -7.125,1.836914 -6.308594,0 -9.759766,-3.5625 -3.432617,-3.581055 -3.432617,-10.000977 0,-6.438476 3.321289,-9.889648 3.321289,-3.451172 9.629883,-3.451172 4.601562,0 7.496094,1.855469 2.894531,1.836914 4.063476,5.417968 l -4.824219,1.317383 q -0.612304,-1.966797 -2.412109,-3.117187 -1.78125,-1.168946 -4.211914,-1.168946 -3.710938,0 -5.640625,2.300782 -1.911133,2.300781 -1.911133,6.735351 0,4.508789 1.966797,6.883789 1.985352,2.375 5.714844,2.375 z"
+     id="text2"
+     style="font-weight:900;font-size:38px;font-family:Arial, Helvetica, sans-serif;letter-spacing:2;text-anchor:middle;fill:#ffffff"
+     aria-label="IFC" />
+  <!-- Subtle Open BIM indicator line -->
+  <path
+     d="M 30 85 L 90 85"
+     stroke="#ffffff"
+     stroke-width="4"
+     stroke-linecap="round"
+     opacity="0.6"
+     id="path2" />
+</svg>

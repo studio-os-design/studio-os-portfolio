@@ -13,7 +13,7 @@ interface Props {
 
 const { 
 	title = "studio-os.de | Vermessung, CAD-Planung & BIM-Modellierung",
-	description = "Professionelle Gebäudevermessung, 2D/3D Bestandspläne und BIM-Modelle. studio-os bietet zentimetergenaue Bestandserfassung und hochwertige 3D-Visualisierung für Architekten und Bauherren.",
+	description = "Präzises 3D-Aufmaß und Architekturvisualisierung. Wir liefern normgerechte CAD-Daten (Vectorworks, Archicad, AutoCAD, Bricscad, IFC) und fotorealistische Renderings.",
 	keywords = "Vermessung, Digitales Aufmaß, Bestandsaufnahme, Bestandspläne, CAD-Planung, BIM, Building Information Modeling, 3D-Design, Architekturvisualisierung",
 	image = import.meta.env.BASE_URL + "images/profile/PROFILE.webp"
 } = Astro.props;
@@ -22,10 +22,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="de" class="scroll-smooth scroll-pt-[64px] md:scroll-pt-[72px]">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon light.svg`} />
         <meta name="generator" content={Astro.generator} />
         
@@ -107,9 +107,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             :root.dark {
                 background-color: #0b1212;
             }
+            
+            /* Custom Scroll Snapping Physics */
+            @media (min-width: 768px) {
+                html {
+                    scroll-snap-type: y proximity;
+                }
+            }
         </style>
     </head>
-    <body class="bg-transparent text-gray-900 dark:text-white overflow-y-auto snap-y snap-mandatory">
+    <body class="bg-transparent text-gray-900 dark:text-white overflow-y-auto overflow-x-hidden">
         <Background />
         <AppHeader />
         <slot />

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   fill="#FFFFFF"
+   role="img"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="vectorworks-dark.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="16.666667"
+     inkscape:cx="13.68"
+     inkscape:cy="12.27"
+     inkscape:window-width="1920"
+     inkscape:window-height="1131"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <title
+     id="title1">Vectorworks</title>
+  <circle
+     style="fill:#000000;stroke-width:11.3386;stroke-linecap:round;stroke-miterlimit:1.5"
+     id="path2"
+     cx="12"
+     cy="12"
+     r="12" />
+  <path
+     d="M 12,1.4849242 C 6.2167083,1.4849242 1.4849242,6.2167083 1.4849242,12 1.4849242,17.783292 6.2167083,22.515076 12,22.515076 17.783292,22.515076 22.515076,17.783292 22.515076,12 22.515076,6.2167083 17.783292,1.4849242 12,1.4849242 Z M 12,21.397849 C 6.8081813,21.397849 2.602151,17.191819 2.602151,12 2.602151,6.8081813 6.8081813,2.602151 12,2.602151 c 5.191819,0 9.397849,4.2060303 9.397849,9.397849 0,5.191819 -4.20603,9.397849 -9.397849,9.397849 z M 9.1740733,8.0568465 H 7.2024966 c -0.1314384,0 -0.1822613,0.075358 -0.1314384,0.1971577 l 3.8774338,9.3321298 c 0.03505,0.08587 0.131439,0.197158 0.262877,0.197158 h 1.7087 c 0.131438,0 0.180509,-0.07536 0.131438,-0.197158 L 9.2397925,8.1225657 c -0.024535,-0.061338 -0.030669,-0.065719 -0.065719,-0.065719 z m 7.6234297,0 h -1.971576 c -0.06572,0 -0.113914,0.020154 -0.131439,0.065719 l -1.511542,3.7459955 a 0.52575379,0.52575379 0 0 0 0,0.328597 l 0.920069,2.234453 c 0.06572,0.131439 0.197158,0.131439 0.262877,0 l 2.56305,-6.177607 c 0.04995,-0.1217996 0,-0.1971577 -0.131439,-0.1971575 z"
+     id="path1"
+     style="stroke-width:1" />
+</svg>
