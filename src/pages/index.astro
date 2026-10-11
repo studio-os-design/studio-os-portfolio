@@ -7,10 +7,7 @@ import { Image } from 'astro:assets';
 import osLogoLight from '../assets/OS LOGO light.svg';
 import osLogoDark from '../assets/OS LOGO dark.svg';
 
-import r1 from '../assets/images/renders/RENDER1.jpg';
-import h1 from '../assets/images/renders/HOMESTAGING1.jpg';
-import h2 from '../assets/images/renders/HOMESTAGING2.jpg';
-import bimImage from '../assets/images/bim/bim-daten-architektur-3d-modell-visualisierung.jpg';
+import bimImage from '../assets/images/bim/bim-daten-architektur-3d-modell-visualisierung.webp';
 
 import pinterestLight from '../assets/images/logos/pinterest light.svg';
 import pinterestDark from '../assets/images/logos/pinterest dark.svg';
@@ -20,6 +17,8 @@ import linkedinLight from '../assets/images/logos/linkedin light.svg';
 import linkedinDark from '../assets/images/logos/linkedin dark.svg';
 
 const vermessungImages = import.meta.glob('../assets/images/vermessung/**/*.webp', { eager: true });
+const rendersImages = import.meta.glob('../assets/images/renders/*.webp', { eager: true });
+const homestagingImages = import.meta.glob('../assets/images/homestaging/*.webp', { eager: true });
 
 const vermessungProjectsMap: Record<string, any> = {};
 
@@ -53,7 +52,7 @@ const projects = Object.values(vermessungProjectsMap)
     .sort((a : any, b : any) => a.num - b.num)
     .map((p : any) => ({
         title: p.title,
-        description: `${p.title}. Klicken zum vergrößern.`,
+        description: "Klicken zum Anzeigen der Slideshow.",
         images: p.images.sort((a : any, b : any) => a.name.localeCompare(b.name)).map((img : any) => ({
             src: img.path,
             isWide: (img.width / img.height) > 1.5
@@ -62,27 +61,34 @@ const projects = Object.values(vermessungProjectsMap)
 
 projects.push({
     title: "Ihr nächstes Projekt",
-    description: "Sie benötigen eine umfassende digitale Dokumentation als Planungsgrundlage? Dann kontaktieren Sie uns gerne!",
+    description: "Klicken zum Anzeigen der Slideshow.",
     images: [
         { src: bimImage, isWide: (bimImage.width / bimImage.height) > 1.5 },
     ]
 });
 
+const processSimpleImages = (glob: Record<string, any>) => {
+    return Object.keys(glob)
+        .sort()
+        .map((path) => {
+            const img = (glob[path] as any).default;
+            return {
+                src: img,
+                isWide: (img.width / img.height) > 1.5
+            };
+        });
+};
+
 const visualizations = [
     {
         title: "Professionelle Visualisierungen",
         description: "Ob basierend auf 2D-Plänen oder fertigen 3D-Modellen: Wir verwandeln Ihre Visionen in fotorealistische Renderings, stilisierte Montagen oder dynamische Videos.",
-        images: [
-            { src: r1, isWide: (r1.width / r1.height) > 1.5 }
-        ]
+        images: processSimpleImages(rendersImages)
     },
     {
         title: "Digitales Home-Staging",
         description: "Wir zeigen das volle Potenzial unmöblierter Räume, indem wir sie virtuell einrichten – so werden Immobilien für Käufer sofort emotional erlebbar.",
-        images: [
-            { src: h1, isWide: (h1.width / h1.height) > 1.5 },
-            { src: h2, isWide: (h2.width / h2.height) > 1.5 }
-        ]
+        images: processSimpleImages(homestagingImages)
     }
 ];
 ---
@@ -134,7 +140,7 @@ const visualizations = [
                     </div>
 
 					<div class="w-full lg:w-[45%] text-left reveal z-10 flex flex-col justify-center h-full">
-						<h1 class="text-gray-900 dark:text-white font-bold text-3xl md:text-4xl xl:text-5xl font-heading leading-tight transition-all duration-700" id="hero-title">
+						<h1 class="text-gray-900 dark:text-white font-bold text-3xl md:text-4xl xl:text-5xl font-heading leading-tight transition-all duration-700" id="hero-title" aria-label="Präzise Vermessung und 3D-Planung für Ihre Projekte">
 							Präzise Vermessung <br/> & 3D-Planung für <br/> Ihre Projekte
 						</h1>
 						<p class="mt-8 text-gray-700 dark:text-gray-300 text-base lg:text-lg max-w-xl transition-all duration-700" id="hero-text">
@@ -143,12 +149,14 @@ const visualizations = [
 							<a
 							  href="#vermessung"
 							  class="relative flex h-12 items-center justify-center px-8 rounded-full border border-black/10 dark:border-white/20 bg-black/5 dark:bg-white/5 text-gray-900 dark:text-white font-bold transition hover:bg-black/10 dark:hover:bg-white/10 active:scale-95 sm:w-max"
+							  aria-label="Unsere Leistungen im Bereich Vermessung und Planung ansehen"
 							>
 							  Unsere Leistungen
 							</a>
 							<a
 							  href="#kontakt"
 							  class="relative flex h-12 items-center justify-center px-8 rounded-full bg-almond text-eclipse font-bold transition hover:scale-105 active:scale-95 sm:w-max shadow-lg shadow-almond/20"
+							  aria-label="Kontakt mit studio-os.de aufnehmen"
 							>
 							  Kontakt aufnehmen
 							</a>
@@ -172,7 +180,7 @@ const visualizations = [
 		</div>
 
 		<!-- Vermessung Section -->
-		<div id="vermessung" class="relative min-h-dvh flex items-center bg-black/5 dark:bg-black/20 py-16 md:py-8 snap-start">
+		<div id="vermessung" class="relative min-h-dvh flex items-center bg-black/5 dark:bg-black/20 py-16 md:py-32 snap-start">
 			<Container>
 				<div class="zoom-content">
 					<div class="md:w-2/3 lg:w-1/2 reveal">
@@ -189,15 +197,21 @@ const visualizations = [
 							<li><strong>Sofort startklar:</strong> Sie erhalten auf Wunsch native Daten für Ihr bevorzugtes CAD-System, die ohne weitere Anpassungen direkt von Ihnen genutzt werden können.</li>
 						</ul>
 
-						<h3 class="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl font-heading">
+						<h3 class="text-2xl font-bold text-gray-900 dark:text-white md:text-3xl font-heading mt-12 md:mt-[4.5rem]">
 							Referenzprojekte
 						</h3>
 					</div>
 					
 					<!-- Interactive Portfolio Grid -->
-					<div class="mt-6 flex flex-col sm:flex-row flex-wrap gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
+					<div class="mt-8 md:mt-12 flex flex-col sm:flex-row flex-wrap gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
 						{projects.map((project: any) => (
-							<div class="group group/card relative flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-hidden aspect-[4/3] data-[expanded=true]:aspect-[3/2] data-[expanded=true]:w-full reveal cursor-pointer portfolio-card" data-expanded="false">
+							<div 
+                                class="group group/card relative flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-hidden aspect-[4/3] data-[expanded=true]:aspect-[3/2] data-[expanded=true]:w-full reveal cursor-pointer portfolio-card" 
+                                data-expanded="false"
+                                role="button"
+                                tabindex="0"
+                                aria-label={`Projekt ${project.title} ansehen`}
+                            >
                                 <!-- Slideshow Container -->
                                 <div class="absolute inset-0 w-full h-full slideshow-container bg-white">
                                     {project.images.map((img: any, idx: number) => (
@@ -225,10 +239,10 @@ const visualizations = [
                                 <!-- Slideshow Controls -->
                                 {project.images.length > 1 && (
                                     <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-6 opacity-0 transition-all duration-300 group-data-[expanded=true]:opacity-100 z-50 pointer-events-none">
-                                        <button class="prev-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100">
+                                        <button class="prev-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Vorheriges Bild">
                                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
                                         </button>
-                                        <button class="next-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100">
+                                        <button class="next-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Nächstes Bild">
                                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
                                         </button>
                                     </div>
@@ -248,21 +262,27 @@ const visualizations = [
 		</div>
 
 		<!-- Visualisierung Section -->
-		<div id="visualisierung" class="relative min-h-dvh flex items-center py-16 md:py-12 snap-start">
+		<div id="visualisierung" class="relative min-h-dvh flex items-center py-16 md:py-32 snap-start">
 			<Container>
 				<div class="zoom-content">
 					<div class="md:w-2/3 lg:w-1/2 reveal">
 						<h2 class="text-4xl font-bold text-gray-900 dark:text-white md:text-5xl font-heading">
 							3D Visualisierung & Bildmontagen
 						</h2>
-						<p class="my-6 text-gray-700 dark:text-gray-200">
+						<p class="my-4 text-gray-700 dark:text-gray-200">
 							Erwecken Sie Ihre Projekte schon vor dem ersten Spatenstich zum Leben! Mit hochwertigem Bildmaterial machen wir Ihre Planungen greifbar – eine ideale Unterstützung, um <strong>Kunden oder Investoren zu überzeugen</strong> und die Vermarktung zu beschleunigen.						</p>
 					</div>
 					
 					<!-- Bild-Container -->
-					<div class="mt-8 flex flex-col md:flex-row gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
+					<div class="mt-8 md:mt-12 flex flex-col md:flex-row gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
 						{visualizations.map((project: any) => (
-							<div class="group group/card relative flex-shrink-0 w-full md:w-1/2 overflow-hidden aspect-[4/3] data-[expanded=true]:aspect-[3/2] data-[expanded=true]:w-full reveal cursor-pointer portfolio-card" data-expanded="false">
+							<div 
+                                class="group group/card relative flex-shrink-0 w-full md:w-1/2 overflow-hidden aspect-[4/3] data-[expanded=true]:aspect-[3/2] data-[expanded=true]:w-full reveal cursor-pointer portfolio-card" 
+                                data-expanded="false"
+                                role="button"
+                                tabindex="0"
+                                aria-label={`Visualisierung ${project.title} ansehen`}
+                            >
 								<!-- Slideshow Container -->
                                 <div class="absolute inset-0 w-full h-full slideshow-container bg-black">
                                     {project.images.map((img: any, idx: number) => (
@@ -290,10 +310,10 @@ const visualizations = [
                                 <!-- Slideshow Controls -->
                                 {project.images.length > 1 && (
                                     <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-6 opacity-0 transition-all duration-300 group-data-[expanded=true]:opacity-100 z-50 pointer-events-none">
-                                        <button class="prev-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100">
+                                        <button class="prev-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Vorheriges Bild">
                                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
                                         </button>
-                                        <button class="next-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100">
+                                        <button class="next-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Nächstes Bild">
                                             <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
                                         </button>
                                     </div>
@@ -615,6 +635,13 @@ const visualizations = [
                 let next = currentSlide + 1;
                 if (next >= slides.length) next = 0;
                 showSlide(next);
+            });
+
+            card.addEventListener('keydown', (e) => {
+                if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+                    e.preventDefault();
+                    (card as HTMLElement).click();
+                }
             });
 
             card.addEventListener('click', () => {
