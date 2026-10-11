@@ -218,6 +218,7 @@ const visualizations = [
                                         <div 
                                             class={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out slide ${idx === 0 ? 'opacity-100' : 'opacity-0'} ${img.isWide ? 'bg-black' : 'bg-white'}`}
                                             data-index={idx}
+                                            data-wide={img.isWide}
                                         >
                                             {typeof img.src === 'string' ? (
                                                 <img 
@@ -571,7 +572,6 @@ const visualizations = [
             background: black;
         }
 
-        /* Show text at bottom at all times on mobile expanded */
         .portfolio-card[data-expanded="true"] .portfolio-info-fade {
             opacity: 1 !important;
             animation: none !important;
@@ -579,11 +579,28 @@ const visualizations = [
             transform: none !important;
             display: flex !important;
             z-index: 150 !important;
+            background: linear-gradient(to top, rgba(0,0,0,0.25), transparent) !important;
         }
 
-        .portfolio-card[data-expanded="true"] .portfolio-info-fade * {
+        /* Wide image specific: remove background and fade */
+        .portfolio-card[data-expanded="true"] .slide[data-wide="true"] {
+            background: transparent !important;
+        }
+        .portfolio-card[data-expanded="true"] .slide[data-wide="true"] ~ .portfolio-info-fade {
+            background: transparent !important;
+        }
+
+        .portfolio-card[data-expanded="true"] .mobile-close-btn {
             opacity: 1 !important;
-            transform: none !important;
+            pointer-events: auto !important;
+            display: block !important;
+            z-index: 200 !important;
+            scale: 0.7; /* Smaller button */
+        }
+
+        .portfolio-card[data-expanded="true"] .prev-slide,
+        .portfolio-card[data-expanded="true"] .next-slide {
+            scale: 0.6 !important; /* Smaller buttons */
         }
     }
 
@@ -606,7 +623,8 @@ const visualizations = [
     }
 
     .portfolio-card[data-expanded="true"] .portfolio-info-fade {
-        animation: fade-out-info 0.8s ease-in-out 2.5s forwards;
+        opacity: 1 !important;
+        animation: none !important;
     }
 
     /* Desktop only: remove hover zoom when expanded */
@@ -614,6 +632,12 @@ const visualizations = [
         .portfolio-card[data-expanded="true"] img {
             scale: 1 !important;
         }
+    }
+
+    /* Keep text visible for 2 seconds after closing */
+    .portfolio-card[data-recent-close="true"] .portfolio-info-fade {
+        opacity: 1 !important;
+        transition: opacity 0.8s ease-in-out 2s !important;
     }
 
     /* Hide text completely when any card is expanded, unless it's the expanded one */
@@ -879,6 +903,7 @@ const visualizations = [
                     }
                 } else {
                     card.setAttribute('data-expanded', 'false');
+                    card.setAttribute('data-recent-close', 'true');
                     document.body.style.overflow = '';
                     
                     if (!isMobile) {
@@ -921,6 +946,11 @@ const visualizations = [
                             prevBtn.style.transition = '';
                             nextBtn.style.transition = '';
                         }
+
+                        // Remove recent-close after its transition is done (2s delay + 0.8s duration)
+                        setTimeout(() => {
+                            card.removeAttribute('data-recent-close');
+                        }, 3000);
                     }, isMobile ? 500 : 1200); // 500ms to match the fade-out on mobile
                 }
             });
