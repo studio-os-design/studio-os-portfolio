@@ -505,6 +505,14 @@ const visualizations = [
             transform: scale(0.92);
         }
         
+        /* Disable scale on mobile to allow fixed positioning for slideshow */
+        @media (max-width: 640px) {
+            .zoom-content {
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+
         .snap-start.active-section .zoom-content {
             transform: scale(1);
             opacity: 1;
@@ -530,20 +538,42 @@ const visualizations = [
             z-index: 100 !important;
             border-radius: 0 !important;
             aspect-ratio: auto !important;
-            transition: none !important; /* No expansion animation on mobile */
+            transition: opacity 0.5s ease-in-out !important;
+            animation: fade-in 0.5s ease-in-out forwards;
+            background: black;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .portfolio-card[data-expanded="true"] img {
             width: 100vw !important;
             height: 100dvh !important;
             object-fit: contain !important;
-            scale: 1 !important; /* No manual zoom */
+            scale: 1 !important;
             transition: none !important;
         }
         
         .portfolio-card[data-expanded="true"] .slideshow-container {
             height: 100dvh !important;
-            background: black; /* Better for contain */
+            background: black;
+        }
+
+        /* Show text at bottom at all times on mobile expanded */
+        .portfolio-card[data-expanded="true"] .portfolio-info-fade {
+            opacity: 1 !important;
+            animation: none !important;
+            pointer-events: auto;
+            transform: none !important;
+            display: flex !important;
+            z-index: 150 !important;
+        }
+
+        .portfolio-card[data-expanded="true"] .portfolio-info-fade * {
+            opacity: 1 !important;
+            transform: none !important;
         }
     }
 
@@ -798,7 +828,7 @@ const visualizations = [
                             info.style.animation = '';
                             info.style.opacity = '';
                         }
-                    }, isMobile ? 300 : 1200);
+                    }, isMobile ? 500 : 1200); // 500ms to match the fade-out on mobile
                 }
             });
         });
