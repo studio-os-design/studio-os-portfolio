@@ -530,17 +530,20 @@ const visualizations = [
             z-index: 100 !important;
             border-radius: 0 !important;
             aspect-ratio: auto !important;
+            transition: none !important; /* No expansion animation on mobile */
         }
 
         .portfolio-card[data-expanded="true"] img {
+            width: 100vw !important;
             height: 100dvh !important;
-            object-fit: cover !important;
-            scale: 1.15;
-            transition: transform 0.3s ease-out, scale 1.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            object-fit: contain !important;
+            scale: 1 !important; /* No manual zoom */
+            transition: none !important;
         }
         
         .portfolio-card[data-expanded="true"] .slideshow-container {
             height: 100dvh !important;
+            background: black; /* Better for contain */
         }
     }
 
@@ -638,25 +641,16 @@ const visualizations = [
             const nextBtn = card.querySelector('.next-slide');
             let currentSlide = 0;
 
-            // Swipe & Pan state
+            // Swipe state
             let touchStartX = 0;
             let touchStartY = 0;
             let touchStartTime = 0;
-            let currentPanX = 0;
-            let isPanning = false;
 
             function showSlide(index: number) {
                 if (index === currentSlide) return;
                 
                 const currentImg = slides[currentSlide] as HTMLElement;
                 const nextImg = slides[index] as HTMLElement;
-
-                // Reset pan for all images in this card
-                slides.forEach(s => {
-                    const img = s.querySelector('img');
-                    if (img) img.style.transform = '';
-                });
-                currentPanX = 0;
 
                 // Move next image to top and hide it initially
                 nextImg.style.transition = 'none';
@@ -703,47 +697,30 @@ const visualizations = [
                 updateSlide(next);
             });
 
-            // Mobile Gestures (Problem 3)
+            // Mobile Gestures
             card.addEventListener('touchstart', (e) => {
                 if (card.getAttribute('data-expanded') !== 'true') return;
+                // Allow native pinch-to-zoom by only handling single touch for swipes
+                if ((e as TouchEvent).touches.length > 1) return;
+                
                 touchStartX = (e as TouchEvent).touches[0].clientX;
                 touchStartY = (e as TouchEvent).touches[0].clientY;
                 touchStartTime = Date.now();
-                isPanning = false;
-            }, { passive: true });
-
-            card.addEventListener('touchmove', (e) => {
-                if (card.getAttribute('data-expanded') !== 'true') return;
-                if (window.innerWidth >= 640) return;
-
-                const touchX = (e as TouchEvent).touches[0].clientX;
-                const touchY = (e as TouchEvent).touches[0].clientY;
-                const diffX = touchX - touchStartX;
-                const diffY = touchY - touchStartY;
-
-                // If horizontal movement is much greater than vertical, we handle it as panning
-                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
-                    isPanning = true;
-                    const img = slides[currentSlide].querySelector('img');
-                    if (img) {
-                        const panLimit = window.innerWidth * 0.15; 
-                        let pan = currentPanX + (diffX * 0.6);
-                        if (pan > panLimit) pan = panLimit;
-                        if (pan < -panLimit) pan = -panLimit;
-                        img.style.transform = `scale(1.15) translateX(${pan}px)`;
-                    }
-                }
             }, { passive: true });
 
             card.addEventListener('touchend', (e) => {
                 if (card.getAttribute('data-expanded') !== 'true') return;
+                if ((e as TouchEvent).touches.length > 0) return; // Still touching with other fingers
                 
                 const touchEndX = (e as TouchEvent).changedTouches[0].clientX;
+                const touchEndY = (e as TouchEvent).changedTouches[0].clientY;
                 const diffX = touchEndX - touchStartX;
+                const diffY = touchEndY - touchStartY;
                 const diffTime = Date.now() - touchStartTime;
 
                 // Fast swipe detection for navigation
-                if (Math.abs(diffX) > 50 && diffTime < 300) {
+                // Only navigate if horizontal movement is dominant and significant
+                if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY) && diffTime < 300) {
                     if (diffX > 0) {
                         let next = currentSlide - 1;
                         if (next < 0) next = slides.length - 1;
@@ -753,13 +730,6 @@ const visualizations = [
                         if (next >= slides.length) next = 0;
                         updateSlide(next);
                     }
-                    currentPanX = 0;
-                } else if (isPanning) {
-                    // Save the current pan position
-                    const panLimit = window.innerWidth * 0.15;
-                    currentPanX += (diffX * 0.6);
-                    if (currentPanX > panLimit) currentPanX = panLimit;
-                    if (currentPanX < -panLimit) currentPanX = -panLimit;
                 }
             }, { passive: true });
 
@@ -772,67 +742,63 @@ const visualizations = [
 
             card.addEventListener('click', () => {
                 const isExpanded = card.getAttribute('data-expanded') === 'true';
-                
-                // Close other cards in the same grid
                 const grid = card.closest('.portfolio-grid');
                 const otherCards = grid?.querySelectorAll('.portfolio-card');
+                const isMobile = window.innerWidth < 640;
                 
                 if (!isExpanded) {
                     card.setAttribute('data-expanded', 'true');
-                    grid?.setAttribute('data-any-expanded', 'true');
                     
-                    // Lock body scroll on mobile
-                    if (window.innerWidth < 640) {
+                    if (isMobile) {
                         document.body.style.overflow = 'hidden';
+                    } else {
+                        grid?.setAttribute('data-any-expanded', 'true');
+                        otherCards?.forEach(c => {
+                            if (c !== card) {
+                                c.setAttribute('data-expanded', 'false');
+                                c.setAttribute('data-any-expanded', 'true');
+                            }
+                        });
+                        
+                        setTimeout(() => {
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 600);
                     }
-
-                    otherCards?.forEach(c => {
-                        if (c !== card) {
-                            c.setAttribute('data-expanded', 'false');
-                            c.setAttribute('data-any-expanded', 'true');
-                        }
-                    });
-                    
-                    setTimeout(() => {
-                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }, 600);
                 } else {
                     card.setAttribute('data-expanded', 'false');
-                    card.setAttribute('data-transitioning', 'true');
-                    grid?.setAttribute('data-any-expanded', 'false');
-                    
-                    // Unlock body scroll
                     document.body.style.overflow = '';
+                    
+                    if (!isMobile) {
+                        card.setAttribute('data-transitioning', 'true');
+                        grid?.setAttribute('data-any-expanded', 'false');
+                        otherCards?.forEach(c => {
+                            c.setAttribute('data-any-expanded', 'false');
+                        });
+                    }
 
-                    otherCards?.forEach(c => {
-                        c.setAttribute('data-any-expanded', 'false');
-                    });
-
-                    // Problem 2 & Smoothness: Reset smoothly while minimizing
+                    // Reset smoothly
                     if (currentSlide !== 0) {
                         showSlide(0);
                     }
                     
                     setTimeout(() => {
                         currentSlide = 0;
-                        card.removeAttribute('data-transitioning');
+                        if (!isMobile) card.removeAttribute('data-transitioning');
                         slides.forEach((slide, i) => {
                             const s = slide as HTMLElement;
                             s.style.opacity = i === 0 ? '1' : '0';
                             s.style.zIndex = i === 0 ? '20' : '0';
                             s.style.transition = 'none';
-                            // Reset any zoom/pan
                             const img = s.querySelector('img');
                             if (img) img.style.transform = '';
                         });
-                        currentPanX = 0;
                         
                         const info = card.querySelector('.portfolio-info-fade') as HTMLElement;
                         if (info) {
                             info.style.animation = '';
                             info.style.opacity = '';
                         }
-                    }, 1200); // Wait for transition to finish
+                    }, isMobile ? 300 : 1200);
                 }
             });
         });
