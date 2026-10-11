@@ -7,19 +7,10 @@ import { Image } from 'astro:assets';
 import osLogoLight from '../assets/OS LOGO light.svg';
 import osLogoDark from '../assets/OS LOGO dark.svg';
 
-import v1_1 from '../assets/images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1.png';
-import v1_2 from '../assets/images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1_BESTAND.jpg';
-import v1_3 from '../assets/images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1_MODELL.png';
-import v1_4 from '../assets/images/vermessung/Vermessung eines historischen Gebäudes in Bayreuth/VERMESSUNG_BEISPIEL 1_PLAENE.png';
-
-import v2_1 from '../assets/images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2.png';
-import v2_2 from '../assets/images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2 3D_DATEN_LUFTBILD.png';
-import v2_3 from '../assets/images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2 3D_MODELL.png';
-import v2_4 from '../assets/images/vermessung/Vermessung eines Restaurantkomplexes in Nürnberg/VERMESSUNG_BEISPIEL 2 PLAENE.png';
-
 import r1 from '../assets/images/renders/RENDER1.jpg';
 import h1 from '../assets/images/renders/HOMESTAGING1.jpg';
 import h2 from '../assets/images/renders/HOMESTAGING2.jpg';
+import bimImage from '../assets/images/bim/bim-daten-architektur-3d-modell-visualisierung.jpg';
 
 import pinterestLight from '../assets/images/logos/pinterest light.svg';
 import pinterestDark from '../assets/images/logos/pinterest dark.svg';
@@ -28,37 +19,70 @@ import instagramDark from '../assets/images/logos/instagram dark.svg';
 import linkedinLight from '../assets/images/logos/linkedin light.svg';
 import linkedinDark from '../assets/images/logos/linkedin dark.svg';
 
-const projects = [
-    {
-        title: "Vermessung eines historischen Gebäudes in Bayreuth",
-        description: "Detailliertes Aufmaß und digitale Bestandsaufnahme für komplexe Gebäudestrukturen. Klicken zum Erweitern.",
-        images: [v1_1, v1_2, v1_3, v1_4]
-    },
-    {
-        title: "Vermessung eines Restaurantkomplexes in Nürnberg",
-        description: "Präzise Erfassung weitläufiger Gastronomieflächen zur Modernisierungsplanung. Klicken zum Erweitern.",
-        images: [v2_1, v2_2, v2_3, v2_4]
-    },
-    {
-        title: "Ihr nächstes Projekt",
-        description: "Sie benötigen eine umfassende digitale Dokumentation als Planungsgrundlage? Dann kontaktieren Sie uns gerne!",
-        images: [
-            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
-            "https://images.unsplash.com/photo-1583082302305-6435bc2178fc?q=80&w=1200&auto=format&fit=crop",
-        ]
+const vermessungImages = import.meta.glob('../assets/images/vermessung/**/*.webp', { eager: true });
+
+const vermessungProjectsMap: Record<string, any> = {};
+
+for (const path in vermessungImages) {
+    const parts = path.split('/');
+    const folderName = parts[parts.length - 2];
+    const fileName = parts[parts.length - 1];
+
+    if (!folderName.includes('_') || fileName.startsWith('.')) continue;
+
+    const [numStr, ...nameParts] = folderName.split('_');
+    const num = parseInt(numStr);
+    const projectName = nameParts.join('_');
+
+    if (!vermessungProjectsMap[folderName]) {
+        vermessungProjectsMap[folderName] = {
+            num,
+            title: projectName,
+            images: []
+        };
     }
-];
+    vermessungProjectsMap[folderName].images.push({
+        path: (vermessungImages[path] as any).default,
+        name: fileName,
+        width: (vermessungImages[path] as any).default.width,
+        height: (vermessungImages[path] as any).default.height
+    });
+}
+
+const projects = Object.values(vermessungProjectsMap)
+    .sort((a : any, b : any) => a.num - b.num)
+    .map((p : any) => ({
+        title: p.title,
+        description: `${p.title}. Klicken zum vergrößern.`,
+        images: p.images.sort((a : any, b : any) => a.name.localeCompare(b.name)).map((img : any) => ({
+            src: img.path,
+            isWide: (img.width / img.height) > 1.5
+        }))
+    }));
+
+projects.push({
+    title: "Ihr nächstes Projekt",
+    description: "Sie benötigen eine umfassende digitale Dokumentation als Planungsgrundlage? Dann kontaktieren Sie uns gerne!",
+    images: [
+        { src: bimImage, isWide: (bimImage.width / bimImage.height) > 1.5 },
+    ]
+});
 
 const visualizations = [
     {
         title: "Professionelle Visualisierungen",
         description: "Ob basierend auf 2D-Plänen oder fertigen 3D-Modellen: Wir verwandeln Ihre Visionen in fotorealistische Renderings, stilisierte Montagen oder dynamische Videos.",
-        images: [r1]
+        images: [
+            { src: r1, isWide: (r1.width / r1.height) > 1.5 }
+        ]
     },
     {
         title: "Digitales Home-Staging",
         description: "Wir zeigen das volle Potenzial unmöblierter Räume, indem wir sie virtuell einrichten – so werden Immobilien für Käufer sofort emotional erlebbar.",
-        images: [h1, h2]
+        images: [
+            { src: h1, isWide: (h1.width / h1.height) > 1.5 },
+            { src: h2, isWide: (h2.width / h2.height) > 1.5 }
+        ]
     }
 ];
 ---
@@ -171,27 +195,30 @@ const visualizations = [
 					</div>
 					
 					<!-- Interactive Portfolio Grid -->
-					<div class="mt-6 flex flex-col sm:flex-row gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
-						{projects.map((project) => (
-							<div class="group group/card relative flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-hidden transition-all duration-700 ease-in-out h-[300px] hover:h-[350px] data-[expanded=true]:h-[450px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:h-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
+					<div class="mt-6 flex flex-col sm:flex-row flex-wrap gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
+						{projects.map((project: any) => (
+							<div class="group group/card relative flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 overflow-hidden aspect-[4/3] data-[expanded=true]:aspect-[3/2] data-[expanded=true]:w-full reveal cursor-pointer portfolio-card" data-expanded="false">
                                 <!-- Slideshow Container -->
-                                <div class="absolute inset-0 w-full h-full slideshow-container">
-                                    {project.images.map((img, idx) => (
-                                        typeof img === 'string' ? (
-                                            <img 
-                                                src={img} 
-                                                alt={`${project.title} - Professionelle Bestandsaufnahme und 3D-Modellierung`} 
-                                                class={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105 slide ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
-                                                data-index={idx}
-                                            />
-                                        ) : (
-                                            <Image 
-                                                src={img} 
-                                                alt={`${project.title} - Digitale Bestandsaufnahme und BIM-Planung`} 
-                                                class={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105 slide ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
-                                                data-index={idx}
-                                            />
-                                        )
+                                <div class="absolute inset-0 w-full h-full slideshow-container bg-white">
+                                    {project.images.map((img: any, idx: number) => (
+                                        <div 
+                                            class={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out slide ${idx === 0 ? 'opacity-100' : 'opacity-0'} ${img.isWide ? 'bg-black' : 'bg-white'}`}
+                                            data-index={idx}
+                                        >
+                                            {typeof img.src === 'string' ? (
+                                                <img 
+                                                    src={img.src} 
+                                                    alt={`${project.title} - Professionelle Bestandsaufnahme und 3D-Modellierung`} 
+                                                                                                        class={`transition-all duration-1000 ease-out group-hover/card:scale-110 ${img.isWide ? 'w-full h-full object-cover group-data-[expanded=true]:h-auto group-data-[expanded=true]:object-top group-data-[expanded=true]:[mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] group-data-[expanded=true]:[-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]' : 'w-full h-full object-cover group-data-[expanded=true]:block group-data-[expanded=true]:w-auto group-data-[expanded=true]:mx-auto group-data-[expanded=true]:[mask-image:linear-gradient(to_right,transparent_0%,black_5%,black_80%,transparent_100%)] group-data-[expanded=true]:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_5%,black_80%,transparent_100%)]'}`}
+                                                />
+                                            ) : (
+                                                <Image 
+                                                    src={img.src} 
+                                                    alt={`${project.title} - Digitale Bestandsaufnahme und BIM-Planung`} 
+                                                                                                        class={`transition-all duration-1000 ease-out group-hover/card:scale-110 ${img.isWide ? 'w-full h-full object-cover group-data-[expanded=true]:h-auto group-data-[expanded=true]:object-top group-data-[expanded=true]:[mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] group-data-[expanded=true]:[-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]' : 'w-full h-full object-cover group-data-[expanded=true]:block group-data-[expanded=true]:w-auto group-data-[expanded=true]:mx-auto group-data-[expanded=true]:[mask-image:linear-gradient(to_right,transparent_0%,black_5%,black_80%,transparent_100%)] group-data-[expanded=true]:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_5%,black_80%,transparent_100%)]'}`}
+                                                />
+                                            )}
+                                        </div>
                                     ))}
                                 </div>
 
@@ -207,7 +234,7 @@ const visualizations = [
                                     </div>
                                 )}
 
-								<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-20">
+								<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-20 portfolio-info-fade">
 									<h3 class="text-xl font-bold text-white font-heading transform translate-y-3 transition-transform duration-700 delay-300 group-hover/card:translate-y-0 group-data-[expanded=true]:translate-y-0">{project.title}</h3>
 									<p class="mt-2 text-white/90 text-sm transform translate-y-3 transition-transform duration-700 delay-300 group-hover/card:translate-y-0 group-data-[expanded=true]:translate-y-0">
 										{project.description}
@@ -234,26 +261,29 @@ const visualizations = [
 					
 					<!-- Bild-Container -->
 					<div class="mt-8 flex flex-col md:flex-row gap-0 w-full portfolio-grid overflow-hidden rounded-3xl" data-any-expanded="false">
-						{visualizations.map((project) => (
-							<div class="group group/card relative flex-shrink-0 w-full md:w-1/2 overflow-hidden transition-all duration-700 ease-in-out h-[300px] md:h-[350px] hover:h-[400px] data-[expanded=true]:h-[500px] data-[expanded=true]:w-full data-[expanded=false]:data-[any-expanded=true]:w-0 data-[expanded=false]:data-[any-expanded=true]:h-0 data-[expanded=false]:data-[any-expanded=true]:opacity-0 reveal cursor-pointer portfolio-card" data-expanded="false">
+						{visualizations.map((project: any) => (
+							<div class="group group/card relative flex-shrink-0 w-full md:w-1/2 overflow-hidden aspect-[4/3] data-[expanded=true]:aspect-[3/2] data-[expanded=true]:w-full reveal cursor-pointer portfolio-card" data-expanded="false">
 								<!-- Slideshow Container -->
-                                <div class="absolute inset-0 w-full h-full slideshow-container">
-                                    {project.images.map((img, idx) => (
-                                        typeof img === 'string' ? (
-                                            <img 
-                                                src={img} 
-                                                alt={`${project.title} - Professionelle Bestandsaufnahme und 3D-Modellierung`} 
-                                                class={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105 slide ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
-                                                data-index={idx}
-                                            />
-                                        ) : (
-                                            <Image 
-                                                src={img} 
-                                                alt={`${project.title} - Digitale Bestandsaufnahme und BIM-Planung`} 
-                                                class={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105 slide ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
-                                                data-index={idx}
-                                            />
-                                        )
+                                <div class="absolute inset-0 w-full h-full slideshow-container bg-black">
+                                    {project.images.map((img: any, idx: number) => (
+                                        <div 
+                                            class={`absolute inset-0 w-full h-full transition-opacity duration-[1200ms] ease-in-out slide ${idx === 0 ? 'opacity-100' : 'opacity-0'} ${img.isWide ? 'bg-black' : 'bg-white'}`}
+                                            data-index={idx}
+                                        >
+                                            {typeof img.src === 'string' ? (
+                                                <img 
+                                                    src={img.src} 
+                                                    alt={`${project.title} - Professionelle Bestandsaufnahme und 3D-Modellierung`} 
+                                                                                                        class={`transition-all duration-1000 ease-out group-hover/card:scale-110 ${img.isWide ? 'w-full h-full object-cover group-data-[expanded=true]:h-auto group-data-[expanded=true]:object-top group-data-[expanded=true]:[mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] group-data-[expanded=true]:[-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]' : 'w-full h-full object-cover group-data-[expanded=true]:block group-data-[expanded=true]:w-auto group-data-[expanded=true]:mx-auto group-data-[expanded=true]:[mask-image:linear-gradient(to_right,transparent_0%,black_5%,black_80%,transparent_100%)] group-data-[expanded=true]:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_5%,black_80%,transparent_100%)]'}`}
+                                                />
+                                            ) : (
+                                                <Image 
+                                                    src={img.src} 
+                                                    alt={`${project.title} - Digitale Bestandsaufnahme und BIM-Planung`} 
+                                                                                                        class={`transition-all duration-1000 ease-out group-hover/card:scale-110 ${img.isWide ? 'w-full h-full object-cover group-data-[expanded=true]:h-auto group-data-[expanded=true]:object-top group-data-[expanded=true]:[mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] group-data-[expanded=true]:[-webkit-mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)]' : 'w-full h-full object-cover group-data-[expanded=true]:block group-data-[expanded=true]:w-auto group-data-[expanded=true]:mx-auto group-data-[expanded=true]:[mask-image:linear-gradient(to_right,transparent_0%,black_5%,black_80%,transparent_100%)] group-data-[expanded=true]:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_5%,black_80%,transparent_100%)]'}`}
+                                                />
+                                            )}
+                                        </div>
                                     ))}
                                 </div>
 
@@ -269,7 +299,7 @@ const visualizations = [
                                     </div>
                                 )}
 
-								<div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-20">
+								<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-20 portfolio-info-fade">
 									<h3 class="text-xl font-bold text-white font-heading transform translate-y-3 transition-transform duration-700 delay-300 group-hover/card:translate-y-0 group-data-[expanded=true]:translate-y-0">
 										{project.title}
 									</h3>
@@ -327,11 +357,9 @@ const visualizations = [
 					<div class="flex flex-col items-center gap-16 lg:flex-row reveal">
 						<div class="lg:w-1/2 w-full">
 							<Image 
-								src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" 
+								src={bimImage} 
 								alt="BIM Modellierung und IFC Datenaustausch für Architekten und Bauherren" 
 								class="rounded-3xl shadow-2xl w-full max-h-[500px] object-cover"
-                                width={1200}
-                                height={800}
 							/>
 						</div>
 						<div class="lg:w-1/2">
@@ -462,6 +490,37 @@ const visualizations = [
             opacity: 1;
         }
     }
+
+    .portfolio-card {
+        transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-in-out, scale 0.8s ease-in-out !important;
+    }
+
+    .portfolio-card[data-expanded="true"] {
+        z-index: 50;
+        transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .portfolio-card[data-expanded="false"][data-any-expanded="true"] {
+        opacity: 0 !important;
+        scale: 0.3 !important;
+        width: 0 !important;
+        height: 0 !important;
+        pointer-events: none;
+        transition: opacity 0.4s ease-in, scale 0.7s ease-in, width 1.2s cubic-bezier(0.4, 0, 0.2, 1), height 1.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .portfolio-info-fade {
+        transition: opacity 0.7s ease-in-out;
+    }
+
+    .portfolio-card[data-expanded="true"] .portfolio-info-fade {
+        animation: fade-out-info 0.8s ease-in-out 2.5s forwards;
+    }
+
+    @keyframes fade-out-info {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
 </style>
 
 <script>
@@ -512,9 +571,35 @@ const visualizations = [
             let currentSlide = 0;
 
             function showSlide(index: number) {
+                if (index === currentSlide) return;
+                
+                const currentImg = slides[currentSlide] as HTMLElement;
+                const nextImg = slides[index] as HTMLElement;
+
+                // Move next image to top and hide it initially
+                nextImg.style.transition = 'none';
+                nextImg.style.opacity = '0';
+                nextImg.style.zIndex = '30';
+                
+                // Ensure current image is below and visible
+                currentImg.style.zIndex = '20';
+                currentImg.style.opacity = '1';
+
+                // Force reflow
+                nextImg.offsetHeight;
+
+                // Start fade in
+                nextImg.style.transition = 'opacity 1200ms ease-in-out';
+                nextImg.style.opacity = '1';
+
+                // Cleanup other slides
                 slides.forEach((slide, i) => {
-                    (slide as HTMLElement).style.opacity = i === index ? '1' : '0';
+                    if (i !== index && i !== currentSlide) {
+                        (slide as HTMLElement).style.opacity = '0';
+                        (slide as HTMLElement).style.zIndex = '0';
+                    }
                 });
+
                 currentSlide = index;
             }
 
@@ -551,7 +636,7 @@ const visualizations = [
                     
                     setTimeout(() => {
                         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }, 500);
+                    }, 600);
                 } else {
                     card.setAttribute('data-expanded', 'false');
                     grid?.setAttribute('data-any-expanded', 'false');
