@@ -21,28 +21,28 @@ const softwares = [
 const tripledSoftwares = [...softwares, ...softwares, ...softwares];
 ---
 
-<div class="relative w-full flex flex-col items-center">
+<div class="relative w-full flex flex-col items-center pb-8 md:pb-16">
     <!-- Centered Header -->
-    <div class="mb-4 md:mb-6">
+    <div class="mb-1 md:mb-2">
         <h3 class="text-[9px] md:text-xs font-heading font-bold text-gray-400 dark:text-gray-500 uppercase tracking-[0.5em] text-center">Unterstützte Formate</h3>
     </div>
     
-    <div class="relative w-full overflow-hidden mask-fade-edges h-24 md:h-32">
-        <div class="flex whitespace-nowrap animate-scroll-fast hover:pause-scroll items-center h-full">
+    <div class="relative w-full overflow-hidden mask-fade-edges h-32 md:h-44">
+        <div id="carousel-track" class="flex whitespace-nowrap animate-scroll-fast hover:pause-scroll items-center h-full">
             {tripledSoftwares.map((sw) => (
-                <div class="group relative flex flex-col items-center justify-center px-4 md:px-8 h-full transition-all duration-500">
-                    <!-- Vertical Bokeh Effect -->
-                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-32 bg-matcha/30 dark:bg-matcha/20 blur-[30px] rounded-full scale-y-0 group-hover:scale-y-125 transition-transform duration-700 -z-10"></div>
+                <div class="software-item group relative flex flex-col items-center justify-center px-4 md:px-8 h-full transition-all duration-500 cursor-pointer">
+                    <!-- Circular Bokeh Effect - Centered in item to avoid clipping -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 md:w-18 md:h-18 bg-matcha/50 dark:bg-matcha/40 blur-xl md:blur-2xl rounded-full opacity-0 scale-0 group-hover:scale-125 group-[.is-active]:scale-125 group-hover:opacity-100 group-[.is-active]:opacity-100 transition-all duration-1000 cubic-bezier(0.22, 1, 0.36, 1) -z-10"></div>
                     
-                    <div class="relative transition-transform duration-500 group-hover:-translate-y-6">
+                    <div class="relative transition-transform duration-500 group-hover:-translate-y-6 group-[.is-active]:-translate-y-6">
                         <Image 
                             src={sw.logo} 
                             alt={`${sw.name} Bestandsaufnahme & BIM Planung`} 
-                            class="h-10 w-auto md:h-14 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 ease-out"
+                            class="h-10 w-auto md:h-14 opacity-40 grayscale group-hover:grayscale-0 group-[.is-active]:grayscale-0 group-hover:opacity-100 group-[.is-active]:opacity-100 group-hover:scale-110 group-[.is-active]:scale-110 transition-all duration-500 ease-out"
                         />
                         
                         <!-- Details appearing below -->
-                        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-4 opacity-0 group-hover:opacity-100 transition-all duration-500 text-center pointer-events-none">
+                        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-4 opacity-0 group-hover:opacity-100 group-[.is-active]:opacity-100 transition-all duration-500 text-center pointer-events-none">
                             <p class="text-xs font-bold text-gray-900 dark:text-white whitespace-nowrap">{sw.name}</p>
                             <p class="text-[9px] uppercase tracking-widest text-gray-500 dark:text-gray-400 mt-1 whitespace-nowrap">{sw.formats}</p>
                         </div>
@@ -53,11 +53,46 @@ const tripledSoftwares = [...softwares, ...softwares, ...softwares];
     </div>
 </div>
 
+<script>
+    const track = document.getElementById('carousel-track');
+    const items = document.querySelectorAll('.software-item');
+    let timeoutId: number | undefined;
+
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            // Clear any existing timeout
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+            
+            // Remove active state from all items
+            items.forEach(i => i.classList.remove('is-active'));
+            
+            // Add active state to clicked item
+            item.classList.add('is-active');
+            
+            // Pause carousel
+            track?.classList.add('paused');
+
+            // Set timeout to remove active state and resume carousel after 2 seconds
+            timeoutId = setTimeout(() => {
+                item.classList.remove('is-active');
+                track?.classList.remove('paused');
+                timeoutId = undefined;
+            }, 2000) as unknown as number;
+        });
+    });
+</script>
+
 <style>
     .animate-scroll-fast {
         display: inline-flex;
         animation: scroll 30s linear infinite;
         width: max-content;
+    }
+
+    .paused {
+        animation-play-state: paused !important;
     }
 
     @keyframes scroll {
