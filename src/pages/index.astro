@@ -238,14 +238,19 @@ const visualizations = [
 
                                 <!-- Slideshow Controls -->
                                 {project.images.length > 1 && (
-                                    <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-6 opacity-0 transition-all duration-300 group-data-[expanded=true]:opacity-100 z-50 pointer-events-none">
-                                        <button class="prev-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Vorheriges Bild">
-                                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+                                    <>
+                                        <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-6 opacity-0 transition-all duration-300 group-data-[expanded=true]:opacity-100 z-50 pointer-events-none">
+                                            <button class="prev-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Vorheriges Bild">
+                                                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+                                            </button>
+                                            <button class="next-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Nächstes Bild">
+                                                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+                                            </button>
+                                        </div>
+                                        <button class="mobile-close-btn absolute top-6 right-6 z-[160] p-4 text-white opacity-0 transition-opacity duration-300 pointer-events-none group-data-[expanded=true]:opacity-100 group-data-[expanded=true]:pointer-events-auto md:hidden" aria-label="Schließen">
+                                            <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" /></svg>
                                         </button>
-                                        <button class="next-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Nächstes Bild">
-                                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
-                                        </button>
-                                    </div>
+                                    </>
                                 )}
 
 								<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-20 portfolio-info-fade">
@@ -309,14 +314,19 @@ const visualizations = [
 
                                 <!-- Slideshow Controls -->
                                 {project.images.length > 1 && (
-                                    <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-6 opacity-0 transition-all duration-300 group-data-[expanded=true]:opacity-100 z-50 pointer-events-none">
-                                        <button class="prev-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Vorheriges Bild">
-                                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+                                    <>
+                                        <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-6 opacity-0 transition-all duration-300 group-data-[expanded=true]:opacity-100 z-50 pointer-events-none">
+                                            <button class="prev-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Vorheriges Bild">
+                                                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
+                                            </button>
+                                            <button class="next-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Nächstes Bild">
+                                                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
+                                            </button>
+                                        </div>
+                                        <button class="mobile-close-btn absolute top-6 right-6 z-[160] p-4 text-white opacity-0 transition-opacity duration-300 pointer-events-none group-data-[expanded=true]:opacity-100 group-data-[expanded=true]:pointer-events-auto md:hidden" aria-label="Schließen">
+                                            <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" /></svg>
                                         </button>
-                                        <button class="next-slide pointer-events-auto p-4 rounded-full bg-black/70 text-white hover:bg-primary transition-all shadow-2xl scale-90 hover:scale-100" aria-label="Nächstes Bild">
-                                            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
-                                        </button>
-                                    </div>
+                                    </>
                                 )}
 
 								<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-20 portfolio-info-fade">
@@ -667,9 +677,14 @@ const visualizations = [
 
         portfolioCards.forEach(card => {
             const slides = card.querySelectorAll('.slide');
-            const prevBtn = card.querySelector('.prev-slide');
-            const nextBtn = card.querySelector('.next-slide');
+            const prevBtn = card.querySelector('.prev-slide') as HTMLElement;
+            const nextBtn = card.querySelector('.next-slide') as HTMLElement;
+            const mobileCloseBtn = card.querySelector('.mobile-close-btn') as HTMLElement;
             let currentSlide = 0;
+
+            // State for mobile
+            let buttonsHiddenBySwipe = false;
+            let buttonFadeTimeout: any = null;
 
             // Swipe state
             let touchStartX = 0;
@@ -713,11 +728,50 @@ const visualizations = [
                 showSlide(index);
             }
 
+            function handleButtonActivity() {
+                if (window.innerWidth >= 640 || buttonsHiddenBySwipe) return;
+                
+                if (prevBtn && nextBtn) {
+                    prevBtn.style.display = 'flex';
+                    nextBtn.style.display = 'flex';
+                    prevBtn.style.transition = 'opacity 0.3s ease-out';
+                    nextBtn.style.transition = 'opacity 0.3s ease-out';
+                    prevBtn.style.opacity = '1';
+                    nextBtn.style.opacity = '1';
+
+                    if (buttonFadeTimeout) clearTimeout(buttonFadeTimeout);
+                    buttonFadeTimeout = setTimeout(() => {
+                        prevBtn.style.transition = 'opacity 1.5s ease-in-out';
+                        nextBtn.style.transition = 'opacity 1.5s ease-in-out';
+                        prevBtn.style.opacity = '0.15';
+                        nextBtn.style.opacity = '0.15';
+                    }, 1500);
+                }
+            }
+
+            function hideButtonsPermanently() {
+                if (window.innerWidth >= 640) return;
+                buttonsHiddenBySwipe = true;
+                if (prevBtn && nextBtn) {
+                    prevBtn.style.transition = 'opacity 0.5s ease-out';
+                    prevBtn.style.opacity = '0';
+                    nextBtn.style.transition = 'opacity 0.5s ease-out';
+                    nextBtn.style.opacity = '0';
+                    setTimeout(() => {
+                        if (buttonsHiddenBySwipe) {
+                            prevBtn.style.display = 'none';
+                            nextBtn.style.display = 'none';
+                        }
+                    }, 500);
+                }
+            }
+
             prevBtn?.addEventListener('click', (e) => {
                 e.stopPropagation();
                 let next = currentSlide - 1;
                 if (next < 0) next = slides.length - 1;
                 updateSlide(next);
+                handleButtonActivity();
             });
 
             nextBtn?.addEventListener('click', (e) => {
@@ -725,12 +779,17 @@ const visualizations = [
                 let next = currentSlide + 1;
                 if (next >= slides.length) next = 0;
                 updateSlide(next);
+                handleButtonActivity();
+            });
+
+            mobileCloseBtn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                (card as HTMLElement).click(); // Trigger minimize
             });
 
             // Mobile Gestures
             card.addEventListener('touchstart', (e) => {
                 if (card.getAttribute('data-expanded') !== 'true') return;
-                // Allow native pinch-to-zoom by only handling single touch for swipes
                 if ((e as TouchEvent).touches.length > 1) return;
                 
                 touchStartX = (e as TouchEvent).touches[0].clientX;
@@ -740,7 +799,7 @@ const visualizations = [
 
             card.addEventListener('touchend', (e) => {
                 if (card.getAttribute('data-expanded') !== 'true') return;
-                if ((e as TouchEvent).touches.length > 0) return; // Still touching with other fingers
+                if ((e as TouchEvent).touches.length > 0) return;
                 
                 const touchEndX = (e as TouchEvent).changedTouches[0].clientX;
                 const touchEndY = (e as TouchEvent).changedTouches[0].clientY;
@@ -748,8 +807,6 @@ const visualizations = [
                 const diffY = touchEndY - touchStartY;
                 const diffTime = Date.now() - touchStartTime;
 
-                // Fast swipe detection for navigation
-                // Only navigate if horizontal movement is dominant and significant
                 if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY) && diffTime < 300) {
                     if (diffX > 0) {
                         let next = currentSlide - 1;
@@ -760,6 +817,7 @@ const visualizations = [
                         if (next >= slides.length) next = 0;
                         updateSlide(next);
                     }
+                    hideButtonsPermanently();
                 }
             }, { passive: true });
 
@@ -770,17 +828,42 @@ const visualizations = [
                 }
             });
 
-            card.addEventListener('click', () => {
+            card.addEventListener('click', (e) => {
                 const isExpanded = card.getAttribute('data-expanded') === 'true';
                 const grid = card.closest('.portfolio-grid');
                 const otherCards = grid?.querySelectorAll('.portfolio-card');
                 const isMobile = window.innerWidth < 640;
                 
+                if (isMobile && isExpanded) {
+                    const target = e.target as HTMLElement;
+                    if (target.closest('.mobile-close-btn') || target.closest('.portfolio-info-fade')) {
+                        // Minimize
+                        (card as HTMLElement).click();
+                        return;
+                    }
+
+                    const rect = card.getBoundingClientRect();
+                    const x = (e as MouseEvent).clientX - rect.left;
+                    if (x < rect.width / 2) {
+                        let next = currentSlide - 1;
+                        if (next < 0) next = slides.length - 1;
+                        updateSlide(next);
+                    } else {
+                        let next = currentSlide + 1;
+                        if (next >= slides.length) next = 0;
+                        updateSlide(next);
+                    }
+                    handleButtonActivity();
+                    return;
+                }
+
                 if (!isExpanded) {
                     card.setAttribute('data-expanded', 'true');
+                    buttonsHiddenBySwipe = false;
                     
                     if (isMobile) {
                         document.body.style.overflow = 'hidden';
+                        handleButtonActivity();
                     } else {
                         grid?.setAttribute('data-any-expanded', 'true');
                         otherCards?.forEach(c => {
@@ -827,6 +910,16 @@ const visualizations = [
                         if (info) {
                             info.style.animation = '';
                             info.style.opacity = '';
+                            info.style.transition = '';
+                        }
+
+                        if (prevBtn && nextBtn) {
+                            prevBtn.style.opacity = '';
+                            nextBtn.style.opacity = '';
+                            prevBtn.style.display = '';
+                            nextBtn.style.display = '';
+                            prevBtn.style.transition = '';
+                            nextBtn.style.transition = '';
                         }
                     }, isMobile ? 500 : 1200); // 500ms to match the fade-out on mobile
                 }
