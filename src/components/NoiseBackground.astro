@@ -1,0 +1,166 @@
+<div id="bg-container">
+  <div id="fluid-bg"></div>
+  <div id="grid-overlay"></div>
+  <canvas id="pointCloudCanvas"></canvas>
+</div>
+
+<svg style="display: none;">
+  <filter id="grid-noise-filter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.002" numOctaves="2" seed="123">
+      <animate attributeName="baseFrequency" values="0.002; 0.0025; 0.002" dur="60s" repeatCount="indefinite" />
+    </feTurbulence>
+    <feComponentTransfer>
+      <feFuncA type="linear" slope="1.5" intercept="-0.2" />
+    </feComponentTransfer>
+  </filter>
+</svg>
+
+<style>
+  #bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+    background-color: #0b1212;
+  }
+
+  #fluid-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0b1212 0%, #1a2a2a 50%, #0b1212 100%);
+    background-size: 400% 400%;
+    animation: fluidMove 35s infinite ease-in-out;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.1);
+    will-change: transform;
+  }
+
+  @keyframes fluidMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  #grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba(61, 74, 65, 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(61, 74, 65, 0.4) 1px, transparent 1px);
+    background-size: 4.5rem 4.5rem;
+    /* Apply organic noise mask to the grid */
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves="3" seed="1"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+    mask-size: 200% 200%;
+    animation: maskMove 120s infinite linear;
+  }
+
+  @keyframes maskMove {
+    from { mask-position: 0% 0%; }
+    to { mask-position: 100% 100%; }
+  }
+
+  canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(0.4px); /* Slight blur for bokeh feel */
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('pointCloudCanvas') as HTMLCanvasElement;
+  const ctx = canvas?.getContext('2d');
+
+  if (canvas && ctx) {
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    let points: Point[] = [];
+
+    // Different noise for dots
+    function noise(x: number, y: number, t: number) {
+      const scale1 = 0.0003;
+      const scale2 = 0.0008;
+      
+      let n1 = Math.sin(x * scale1 + t * 0.00012) * Math.cos(y * scale1 + t * 0.00018);
+      let n2 = Math.sin(x * scale2 - t * 0.00022) * Math.cos(y * scale2 + t * 0.00028);
+      
+      return (n1 * 0.7 + n2 * 0.3);
+    }
+
+    class Point {
+      x: number;
+      y: number;
+      size: number;
+      phase: number;
+      flickerSpeed: number;
+
+      constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+        this.size = 1.3;
+        // Same flicker logic as Background.astro
+        this.phase = Math.random() * Math.PI * 2;
+        this.flickerSpeed = 0.001 + Math.random() * 0.002;
+      }
+      
+      draw(time: number) {
+        if (!ctx) return;
+        
+        let n = noise(this.x, this.y, time);
+        let noiseOpacity = (n + 1) / 2; 
+        noiseOpacity = Math.pow(noiseOpacity, 2.5);
+        
+        // Flicker effect from Background.astro
+        let flicker = (Math.sin(time * this.flickerSpeed + this.phase) + 1) / 2;
+        
+        let finalOpacity = noiseOpacity * flicker;
+        
+        if (finalOpacity < 0.01) return;
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        
+        const pointColor = 'rgba(74, 89, 79, 0.9)';
+        
+        ctx.globalAlpha = finalOpacity;
+        ctx.fillStyle = pointColor;
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+      }
+    }
+
+    function init() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      points = [];
+      
+      const gridStep = 36; 
+      
+      for (let x = 0; x <= width + gridStep; x += gridStep) {
+        for (let y = 0; y <= height + gridStep; y += gridStep) {
+          points.push(new Point(x, y));
+        }
+      }
+    }
+
+    function animate(time: number) {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+      points.forEach(p => p.draw(time));
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      init();
+    });
+
+    init();
+    requestAnimationFrame(animate);
+  }
+</script>
