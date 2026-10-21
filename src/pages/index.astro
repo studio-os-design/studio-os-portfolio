@@ -254,7 +254,7 @@ const visualizations = [
                                     </>
                                 )}
 
-								<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-20 portfolio-info-fade">
+								<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-40 portfolio-info-fade">
 									<h3 class="text-xl font-bold text-white font-heading transform translate-y-3 transition-transform duration-700 delay-300 group-hover/card:translate-y-0 group-data-[expanded=true]:translate-y-0">{project.title}</h3>
 									<p class="mt-2 text-white/90 text-sm transform translate-y-3 transition-transform duration-700 delay-300 group-hover/card:translate-y-0 group-data-[expanded=true]:translate-y-0">
 										{project.description}
@@ -331,7 +331,7 @@ const visualizations = [
                                     </>
                                 )}
 
-								<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-20 portfolio-info-fade">
+								<div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/75 to-transparent opacity-0 transition-opacity duration-700 delay-300 group-hover/card:opacity-100 flex flex-col justify-end p-8 pointer-events-none group-data-[expanded=true]:opacity-100 z-40 portfolio-info-fade">
 									<h3 class="text-xl font-bold text-white font-heading transform translate-y-3 transition-transform duration-700 delay-300 group-hover/card:translate-y-0 group-data-[expanded=true]:translate-y-0">
 										{project.title}
 									</h3>
@@ -575,7 +575,7 @@ const visualizations = [
         }
 
         /* Show text at bottom at all times on mobile expanded */
-        .portfolio-card[data-expanded="true"] .portfolio-info-fade {
+        .portfolio-card[data-expanded="true"]:not([data-info-hidden="true"]) .portfolio-info-fade {
             opacity: 1 !important;
             animation: none !important;
             pointer-events: auto;
@@ -583,6 +583,12 @@ const visualizations = [
             display: flex !important;
             z-index: 120 !important; /* Below buttons */
             background: linear-gradient(to top, rgba(255,255,255,0.8), transparent) !important;
+        }
+
+        .portfolio-card[data-expanded="true"][data-info-hidden="true"] .portfolio-info-fade {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transition: opacity 0.5s ease-in-out !important;
         }
 
         .portfolio-card[data-expanded="true"] .portfolio-info-fade h3,
@@ -649,6 +655,12 @@ const visualizations = [
     .portfolio-card[data-expanded="true"] .portfolio-info-fade {
         opacity: 1 !important;
         animation: none !important;
+    }
+
+    .portfolio-card[data-expanded="true"][data-info-hidden="true"] .portfolio-info-fade {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: opacity 0.5s ease-in-out !important;
     }
 
     /* Desktop only: remove hover zoom when expanded */
@@ -869,6 +881,15 @@ const visualizations = [
                 if (!isExpanded) {
                     card.setAttribute('data-expanded', 'true');
                     
+                    // Show info for 2 seconds then hide
+                    card.removeAttribute('data-info-hidden');
+                    if ((card as any)._infoTimeout) clearTimeout((card as any)._infoTimeout);
+                    (card as any)._infoTimeout = setTimeout(() => {
+                        if (card.getAttribute('data-expanded') === 'true') {
+                            card.setAttribute('data-info-hidden', 'true');
+                        }
+                    }, 2000);
+                    
                     if (isMobile) {
                         document.body.style.overflow = 'hidden';
                         handleButtonActivity();
@@ -888,6 +909,11 @@ const visualizations = [
                 } else {
                     card.setAttribute('data-expanded', 'false');
                     card.setAttribute('data-recent-close', 'true');
+                    card.removeAttribute('data-info-hidden');
+                    if ((card as any)._infoTimeout) {
+                        clearTimeout((card as any)._infoTimeout);
+                        (card as any)._infoTimeout = null;
+                    }
                     document.body.style.overflow = '';
                     
                     if (!isMobile) {
