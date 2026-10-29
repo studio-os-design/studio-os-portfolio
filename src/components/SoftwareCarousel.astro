@@ -7,6 +7,7 @@ import autocad from "../assets/images/formats/04_Autocad.svg";
 import allplan from "../assets/images/formats/05_Allplan.svg";
 import bricscad from "../assets/images/formats/06_Bricscad.svg";
 import blender from "../assets/images/formats/07_Blender.svg";
+import punktwolke from "../assets/images/formats/08_Punktwolke.svg";
 
 const softwares = [
     { name: "IFC", formats: ".ifc", logo: ifc },
@@ -16,9 +17,10 @@ const softwares = [
     { name: "Allplan", formats: ".ndw", logo: allplan },
     { name: "BricsCAD", formats: ".dwg", logo: bricscad },
     { name: "Blender", formats: ".blend", logo: blender },
+    { name: "Punktwolke", formats: ".e57, .xyz, .ply", logo: punktwolke },
 ];
 
-const tripledSoftwares = [...softwares, ...softwares, ...softwares];
+const infiniteSoftwares = [...softwares, ...softwares, ...softwares, ...softwares, ...softwares, ...softwares];
 ---
 
 <div class="relative w-full flex flex-col items-center pb-8 md:pb-16">
@@ -29,7 +31,7 @@ const tripledSoftwares = [...softwares, ...softwares, ...softwares];
     
     <div class="relative w-full overflow-hidden mask-fade-edges h-32 md:h-44">
         <div id="carousel-track" class="flex whitespace-nowrap animate-scroll-fast hover:pause-scroll items-center h-full">
-            {tripledSoftwares.map((sw) => (
+            {infiniteSoftwares.map((sw) => (
                 <a 
                     href="javascript:void(0)"
                     class="software-item group relative flex flex-col items-center justify-center px-4 md:px-8 h-full transition-all duration-500 cursor-pointer"
@@ -106,7 +108,7 @@ const tripledSoftwares = [...softwares, ...softwares, ...softwares];
             transform: translateX(0);
         }
         100% {
-            transform: translateX(-33.33%);
+            transform: translateX(-16.666667%);
         }
     }
 
