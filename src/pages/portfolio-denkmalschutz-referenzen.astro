@@ -3,16 +3,30 @@ import Layout from '../layouts/Layout.astro';
 import Container from '../components/Container.astro';
 import { Image } from 'astro:assets';
 
-// Import Images
+// Import Images - Project 1: Marienburg
 import marienburgMain from '../assets/images/denkmalschutz/marienburg-main.webp';
 import marienburgPlan1 from '../assets/images/denkmalschutz/marienburg-plan-1.webp';
 import marienburgPlan2 from '../assets/images/denkmalschutz/marienburg-plan-2.webp';
 import marienburgPlan3 from '../assets/images/denkmalschutz/marienburg-plan-3.webp';
 
+// Import Images - Project 2: Burg Birkenfeld
+import burgBirkenfeldMain from '../assets/images/denkmalschutz/burg-birkenfeld-main.webp';
+import burgBirkenfeldPlan1 from '../assets/images/denkmalschutz/burg-birkenfeld-plan-1.webp';
+import burgBirkenfeldPlan2 from '../assets/images/denkmalschutz/burg-birkenfeld-plan-2.webp';
+import burgBirkenfeldPlan3 from '../assets/images/denkmalschutz/burg-birkenfeld-plan-3.webp';
+
+// Import Images - Project 3: St. Gangolf
 import stgangolfMain from '../assets/images/denkmalschutz/stgangolf-main.webp';
 import stgangolfPlan1 from '../assets/images/denkmalschutz/stgangolf-plan-1.webp';
 import stgangolfPlan2 from '../assets/images/denkmalschutz/stgangolf-plan-2.webp';
 
+// Import Images - Project 4: Hirsch Apotheke
+import hirschApothekeMain from '../assets/images/denkmalschutz/hirsch-apotheke-main.webp';
+import hirschApothekePlan1 from '../assets/images/denkmalschutz/hirsch-apotheke-plan-1.webp';
+import hirschApothekePlan2 from '../assets/images/denkmalschutz/hirsch-apotheke-plan-2.webp';
+import hirschApothekePlan3 from '../assets/images/denkmalschutz/hirsch-apotheke-plan-3.webp';
+
+// Import Images - Project 5: Cusanus Geburtshaus
 import geburtshausMain from '../assets/images/denkmalschutz/geburtshaus-main.webp';
 import geburtshausPlan1 from '../assets/images/denkmalschutz/geburtshaus-plan-1.webp';
 import geburtshausPlan2 from '../assets/images/denkmalschutz/geburtshaus-plan-2.webp';
@@ -42,6 +56,29 @@ const projects = [
         ]
     },
     {
+        title: "Ehemalige Jugendherberge Burg Birkenfeld",
+        address: "Burgstraße 28, 55765 Birkenfeld",
+        year: "2024",
+        attribution: "im Rahmen meiner Anstellung bei tibo ^ architektur",
+        mainPhoto: burgBirkenfeldMain,
+        description: "Die ehemalige Jugendherberge in Birkenfeld ist ein markantes Bauwerk, das auf den historischen Überresten der Burg Birkenfeld errichtet wurde – einer Anlage mit Wurzeln im 14. Jahrhundert. Das Gebäude integriert Fragmente der alten Festungsmauern und eines ehemaligen Turms. Die detaillierte Aufnahme der Rundungen und komplexen Schrägen der mittelalterlichen Bausubstanz sowie die präzise Vermessung des integrierten Fachwerks bilden die essenzielle Grundlage für die weitere städtebauliche Entwicklung durch die Gemeinde.",
+        services: [
+            "Verformungsgerechte Vermessung (Detaillierungsgrad III)",
+            "SLAM-Punktwolke & ergänzende Handvermessung",
+            "Aufnahme der historischen Mauerreste & Turmfragmente",
+            "Zeichnung Gebäude als 3D Modell (LoD 300)",
+            "Zeichnung aller Bestandspläne"
+        ],
+        specMethod: "SLAM-Laserscanning & Handaufmaß",
+        specLOD: "Verformungsgerecht Stufe III / BIM LoD 300",
+        heritageLink: "https://gdke.rlp.de/fileadmin/gdke/Wer_wir_sind/Landesdenkmalpflege/Denkmalliste/Kreis_Birkenfeld.pdf",
+        plans: [
+            { src: burgBirkenfeldPlan1, type: "Grundriss" },
+            { src: burgBirkenfeldPlan2, type: "Schnitt" },
+            { src: burgBirkenfeldPlan3, type: "Ansicht" }
+        ]
+    },
+    {
         title: "Marktkirche St. Gangolf",
         address: "Hauptmarkt 9, 54290 Trier",
         year: "2018",
@@ -60,6 +97,29 @@ const projects = [
         plans: [
             { src: stgangolfPlan1, type: "Grundriss" },
             { src: stgangolfPlan2, type: "Schnitt" }
+        ]
+    },
+    {
+        title: "Gebäude Hirsch Apotheke",
+        address: "Hauptstraße 11, 55765 Birkenfeld",
+        year: "2023",
+        attribution: "im Rahmen meiner Anstellung bei tibo ^ architektur",
+        mainPhoto: hirschApothekeMain,
+        description: "Das Gebäude der Hirsch Apotheke ist ein stadtbildprägendes Ensemble im Zentrum von Birkenfeld. Nach einer bereits erfolgten denkmalgerechten Sanierung der Außenhülle wurde eine hochpräzise Bestandsaufnahme durchgeführt, um den Umbau der Obergeschosse in moderne Wohnungen sowie neue Büroflächen für den laufenden Apothekenbetrieb zu planen. Die Vermessung erforderte besondere Sorgfalt beim Erfassen des freiliegenden Fachwerks und des historischen Dachstuhls.",
+        services: [
+            "Verformungsgerechte Vermessung (Detaillierungsgrad III)",
+            "Handlaser-Vermessung & Fotovermessung",
+            "Zeichnung Gebäude als 3D Modell (LoD 300)",
+            "Zeichnung aller Bestandspläne",
+            "Aufnahme Dachstuhl zur Sanierungsplanung"
+        ],
+        specMethod: "Handlaser & Fotovermessung",
+        specLOD: "Verformungsgerecht Stufe III / BIM LoD 300",
+        heritageLink: "https://gdke.rlp.de/fileadmin/gdke/Wer_wir_sind/Landesdenkmalpflege/Denkmalliste/Kreis_Birkenfeld.pdf",
+        plans: [
+            { src: hirschApothekePlan1, type: "Grundriss" },
+            { src: hirschApothekePlan2, type: "Schnitt" },
+            { src: hirschApothekePlan3, type: "Ansicht" }
         ]
     },
     {
@@ -100,7 +160,7 @@ const projects = [
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
                     <div class="space-y-6">
                         <p>
-                            In meiner über langjährigen beruflichen Laufbahn habe ich mich intensiv auf die hochpräzise Vermessung und detaillierte Bestandsdokumentation spezialisiert. Ein besonderer Schwerpunkt lag dabei von Beginn an auf der Arbeit mit denkmalgeschützter und historischer Bausubstanz – eine Expertise, die ich maßgeblich während meiner Anstellung bei der <a href="https://www.berdi-architekten.de/" target="_blank" rel="noopener noreferrer" class="text-matcha hover:text-almond underline underline-offset-4 decoration-matcha/30 font-bold transition-colors">BERDI Planung GmbH</a> entwickeln durfte.
+                            In meiner langjährigen beruflichen Laufbahn habe ich mich intensiv auf die hochpräzise Vermessung und detaillierte Bestandsdokumentation spezialisiert. Ein besonderer Schwerpunkt lag dabei von Beginn an auf der Arbeit mit denkmalgeschützter und historischer Bausubstanz – eine Expertise, die ich maßgeblich während meiner Anstellung bei der <a href="https://www.berdi-architekten.de/" target="_blank" rel="noopener noreferrer" class="text-matcha hover:text-almond underline underline-offset-4 decoration-matcha/30 font-bold transition-colors">BERDI Planung GmbH</a> entwickeln durfte.
                         </p>
                         <p>
                             Dort war ich für die Erstellung verformungsgerechter Aufmaße (Detaillierungsstufe II / III) sowie für diverse Schadenskartierungen verantwortlich, die als essenzielle Grundlage für denkmalpflegerische Zielstellungen und Sanierungskonzepte dienten. Diese Arbeit lieferte die notwendige Planungssicherheit für interne Planung, Behörden sowie Fachplaner.
@@ -193,7 +253,7 @@ const projects = [
                     <div class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-white/10 pb-4 mb-6">
                         <div>
                             <span class="text-matcha font-bold uppercase tracking-[0.3em] text-xs mb-2 block">Referenzprojekt {index + 1}</span>
-                            <h2 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white font-heading leading-tight">
+                            <h2 class="text-4xl md:text-6xl font-bold text-white font-heading leading-tight">
                                 {project.title}
                             </h2>
                             <p class="text-xl md:text-2xl text-almond/90 font-medium mt-1">{project.address} | {project.year}</p>
@@ -234,7 +294,7 @@ const projects = [
                         <!-- Rechte Spalte (40%) -->
                         <div class="lg:col-span-5 flex flex-col justify-between space-y-6 py-2">
                             <section>
-                                <h3 class="text-xl font-bold text-gray-900 dark:text-white font-heading mb-3 uppercase tracking-wider flex items-center gap-4">
+                                <h3 class="text-xl font-bold text-white font-heading mb-3 uppercase tracking-wider flex items-center gap-4">
                                     <span class="w-10 h-[2px] bg-matcha"></span> Zum Projekt
                                 </h3>
                                 <p class="text-gray-700 dark:text-gray-300 text-sm md:text-lg leading-relaxed mb-6">
@@ -261,7 +321,7 @@ const projects = [
                             </section>
 
                             <section>
-                                <h3 class="text-xl font-bold text-gray-900 dark:text-white font-heading mb-3 uppercase tracking-wider flex items-center gap-4">
+                                <h3 class="text-xl font-bold text-white font-heading mb-3 uppercase tracking-wider flex items-center gap-4">
                                     <span class="w-10 h-[2px] bg-matcha"></span> Leistungsumfang
                                 </h3>
                                 <ul class="grid grid-cols-1 gap-y-3">
@@ -302,12 +362,12 @@ const projects = [
                                         <Image 
                                             src={plan.src} 
                                             alt={`Beispiel ${plan.type}`} 
-                                            class="w-full h-full object-cover transition-all duration-700 brightness-[0.95] dark:brightness-[0.85] group-hover:brightness-110 group-hover:contrast-110"
+                                            class="w-full h-full object-cover transition-all duration-700 brightness-[0.95] dark:brightness-[0.85] group-hover:brightness-100"
                                             style="object-position: 0 100%;"
                                             width={600}
                                             height={450}
                                         />
-                                        <div class="absolute inset-0 bg-black/30 group-hover:bg-matcha/10 transition-all group-hover:shadow-[inset_0_0_50px_rgba(103,124,105,0.2)]"></div>
+                                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/0 transition-all"></div>
                                         
                                         <!-- Bottom Left Indicator Label (Permanent) -->
                                         <div class="absolute bottom-3 left-3 bg-white/80 dark:bg-black/60 backdrop-blur-md px-3 py-1 rounded text-[10px] text-gray-900 dark:text-white/90 uppercase tracking-widest border border-black/5 dark:border-white/10 z-10 group-hover:bg-matcha/80 group-hover:text-white group-hover:border-matcha transition-colors">
@@ -338,11 +398,28 @@ const projects = [
             </section>
         ))}
 
+        <!-- Closing Disclaimer Section -->
+        <section class="min-h-[60dvh] flex flex-col justify-center snap-start relative py-20 bg-eclipse/20 dark:bg-black/40">
+            <Container class="relative z-10 max-w-4xl text-center">
+                <h3 class="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white font-heading mb-8">
+                    Weitere Referenzen auf Anfrage
+                </h3>
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-12">
+                    Die hier gezeigten Projekte stellen lediglich einen Auszug meiner bisherigen Arbeiten im Bereich der Denkmalpflege und Bestandsdokumentation dar, welche ich im Rahmen meiner Tätigkeiten für verschiedene Arbeitgeber realisiert habe. 
+                    <br/><br/>
+                    Sollten Sie detailliertere Informationen zu bestimmten Projekttypen oder weitere Referenzbeispiele benötigen, stelle ich Ihnen diese gerne in einem persönlichen Gespräch zur Verfügung.
+                </p>
+                <a href="/#kontakt" class="inline-flex h-14 items-center justify-center px-10 rounded-full bg-almond text-eclipse font-bold text-lg transition hover:scale-105 active:scale-95 shadow-lg shadow-almond/20">
+                    Kontakt aufnehmen
+                </a>
+            </Container>
+        </section>
+
         <!-- Mobile Info Footer -->
-        <div class="md:hidden p-12 bg-eclipse text-center snap-start min-h-[200px] flex items-center justify-center">
+        <div class="md:hidden p-12 bg-eclipse text-center snap-start min-h-[150px] flex items-center justify-center">
             <p class="text-gray-500 text-xs uppercase tracking-[0.3em] leading-loose">
                 Realisiert im Rahmen der <br/> Anstellung bei <br/> 
-                <span class="text-almond font-bold text-lg">BERDI Planung GmbH</span>
+                <span class="text-almond font-bold text-lg">BERDI Planung GmbH & tibo ^ architektur</span>
             </p>
         </div>
 
@@ -353,8 +430,8 @@ const projects = [
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-            <div class="w-full h-full p-4 md:p-16 flex items-center justify-center">
-                <img id="lightbox-img" src="" alt="Vergrößerte Detailansicht" class="max-w-full max-h-full object-contain shadow-[0_0_80px_rgba(0,0,0,0.8)] rounded-md border border-white/10" />
+            <div class="w-full h-full p-4 md:p-16 flex items-center justify-center overflow-hidden">
+                <img id="lightbox-img" src="" alt="Vergrößerte Detailansicht" class="max-w-full max-h-full object-contain shadow-[0_0_80px_rgba(0,0,0,0.8)] rounded-md border border-white/10 transition-transform duration-300 ease-out cursor-zoom-in" />
             </div>
         </div>
     </main>
@@ -418,12 +495,44 @@ const projects = [
     const lightboxClose = document.getElementById('lightbox-close');
     const triggers = document.querySelectorAll('.lightbox-trigger');
 
+    let isZoomed = false;
+
+    const resetZoom = () => {
+        isZoomed = false;
+        if (lightboxImg) {
+            lightboxImg.style.transform = 'scale(1)';
+            lightboxImg.style.cursor = 'zoom-in';
+            lightboxImg.style.transformOrigin = 'center center';
+        }
+    };
+
+    const toggleZoom = (e: MouseEvent) => {
+        e.stopPropagation();
+        if (!isZoomed) {
+            isZoomed = true;
+            lightboxImg.style.transform = 'scale(2.5)';
+            lightboxImg.style.cursor = 'zoom-out';
+            updatePan(e);
+        } else {
+            resetZoom();
+        }
+    };
+
+    const updatePan = (e: MouseEvent) => {
+        if (!isZoomed) return;
+        const { left, top, width, height } = lightboxImg.getBoundingClientRect();
+        const x = ((e.clientX - left) / width) * 100;
+        const y = ((e.clientY - top) / height) * 100;
+        lightboxImg.style.transformOrigin = `${x}% ${y}%`;
+    };
+
     triggers.forEach(trigger => {
         trigger.addEventListener('click', () => {
             const fullSrc = trigger.getAttribute('data-src');
             if (fullSrc && lightbox && lightboxImg) {
                 lightboxImg.src = fullSrc;
                 lightbox.classList.add('active');
+                resetZoom();
             }
         });
     });
@@ -431,12 +540,16 @@ const projects = [
     const closeLightbox = () => {
         if (lightbox) {
             lightbox.classList.remove('active');
+            setTimeout(resetZoom, 500);
         }
     };
 
+    lightboxImg?.addEventListener('click', toggleZoom);
+    lightboxImg?.addEventListener('mousemove', updatePan);
+
     lightboxClose?.addEventListener('click', closeLightbox);
     lightbox?.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
+        if (e.target === lightbox || (e.target as HTMLElement).parentElement?.id === 'lightbox') {
             closeLightbox();
         }
     });
